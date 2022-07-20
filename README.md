@@ -46,8 +46,9 @@ layout manager
 
 ---
 ## Current view
-Configuration
+Component registry
 ```yml
+# A layout registry and their sections.
 layouts:
   SomeLayout
     navigation
@@ -63,13 +64,28 @@ layouts:
   AlbumListing
   Recipe
 
+# A component registry with required params/props to be used. 
+# Don't know if/how state would be used.
 tiles
   navigationTile
+    prop1
+    prop2
+    prop3
   footer
+    prop1
+    prop2
+    prop3
   sidebars
+    prop1
+    prop2
+    prop3
   rss
   aboutus
+```
 
+Layout configuration
+```yml
+# The configurations for the layouts
 layout-config
   SomeLayout
     navigation
