@@ -21,7 +21,7 @@ I plan to do this specifically for this layout manager test and do not plan to p
   * `string` → Key for the value/function to retrieve
   * `any` → The value to retrieve
   * `<T>` → Parameters to pass to the second param
-* `retrieve` → A way to get something based on key
+* `retrieve`/`tiles` → A way to get something based on key
 * `factory` → Saw this earlier, might be useful to have a place to create new instances of things with default params. Still researching
 
 ### References
@@ -43,3 +43,68 @@ layout manager
       -> layout components
         -> configuration
 ```
+
+---
+## Current view
+Configuration
+```yml
+layouts:
+  SomeLayout
+    navigation
+    sidebar::left
+    sidebar::right
+    footer
+  AnotherLayout
+  BlogListing
+  BlogPost
+  AlbumImage
+  GalleryImage
+  Gallery
+  AlbumListing
+  Recipe
+
+tiles
+  navigationTile
+  footer
+  sidebars
+  rss
+  aboutus
+
+layout-config
+  SomeLayout
+    navigation
+      navigationTile
+    sidebar::left
+      sidebars1
+    sidebar::right
+    footer
+      rss
+      aboutus
+```
+
+Layout component
+```jsx
+RLM.layout('SomeLayout') // Set the layout you want to retrieve from
+const SomeLayout = () => (
+  <div>
+    <div>
+      {RLM.retrieve('navigation', params)}
+    </div>
+    <div>
+      {RLM.tiles('sidebar::left', params)}
+    </div>
+    <div>
+      {RLM.tiles('sidebar::right', params)}
+    </div>
+    <div>
+      {RLM.retrieve('footer', params)}
+    </div>
+  </div>
+)
+```
+
+---
+## Glossary
+| Term/Thing | Definition |
+|---|---|
+| `RLM` | `react-layout-manager` |
