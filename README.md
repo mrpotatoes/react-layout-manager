@@ -1,126 +1,46 @@
-## Layout manager
-I have had an idea to create layouts in such a fashion where they are injectable with components and parameters so that one can focus on "tiles" or "blocks" in a `Drupal` context. Where they are placed is managed by data (yaml/json file) and can be stored as configuration. This allows loosely coupling layout from onscreen components and it's data.
+## Problem Space
+Look, you're a multi-tenant SaaS provider and every client shares the same database and codebase. Your SaaS product is a news platform with all the bells and whistles. You have a ton of backend endpoints and they are beautiful beyond belief. You can't even imagine it. Your SaaS platform completely API driven. Thing is that now you've decided that you actually need to provide an Admin UI since most of your customers said that it is too expensive and time consuming to build an admin UI themselves.
 
-The exact method for this is still unknown to me but that is what this repo is for.
+The only thing is that they want a solution that will not only allow them to add their own content to their websites but also allow for crowd sourced news content.
 
-### Development Process
-1. Finding an injector (or writing my own fast one) is focus #1.
-1. Integrating with `React.Context` and `React.Provider`
-1. The config setup for building it up
-1. Writing a `Babel` plugin (and/or TypeScript's equivalent) to compile these pages into full JSX to save on runtime performace.
+I bet you're thinking "Simple enough" and it is but your POs & Architects want you to develop 1 codebase but make it configurable and deploy a single UI. So now you're thinking "Let's make this configurable" which is great. That is exactly what we want to do. 
 
-## DI containers
-### What
-These are just to look at and see how to use within `React`. Some of these sound really interesting so I may or may not write my own that would better suit the needs of the layout manager. I need something SIMPLE and small.
+So the Epic would be:
+> As a company we want to allow clients to choose their layouts and the tiles that show up on any given page. 
 
-### Reasoning
-I plan to do this specifically for this layout manager test and do not plan to pubish it (blog post at most) and 
+Your questions would likely be
 
-### Requirements
-* `register` →  method/function. Params
-  * `string` → Key for the value/function to retrieve
-  * `any` → The value to retrieve
-  * `<T>` → Parameters to pass to the second param
-* `retrieve`/`tiles` → A way to get something based on key
-* `factory` → Saw this earlier, might be useful to have a place to create new instances of things with default params. Still researching
+1. How configurable is it? (A: The layout, tiles and styles/theme)
+1. The content that shows up in these tiles, how do they work? (A: That comes in via API calls)
+1. Where are these configurations going to live? (A: Pushed up on deploy, in JSON "somewhere" or API)
+1. Does this need to be async or syncronous? (A: sync)
+1. Can layouts have layouts and can tiles have tiles? (A: Tiles yes, Layouts no)
+1. Are the tiles their own app ala a Microfrontend Framework? (A: No)
 
-### References
-* https://github.com/tests-always-included/dizzy
-* https://github.com/zazoomauro/node-dependency-injection
-* https://github.com/ssnau/injecting
-* https://github.com/fjorgemota/jimple
-* https://github.com/andrewmunsell/needlepoint
-* https://github.com/zhang740/power-di
-* https://github.com/jeffijoe/awilix
-* https://github.com/inversify/InversifyJS
-* https://github.com/tsgautier/node-majic
-* https://github.com/angie-framework/angie-injector
+These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager` and is essentially 2 things. 
 
-```
-layout manager
-  routes
-    -> generic page component
-      -> layout components
-        -> configuration
-```
+### 1. A registry 
+A simple object that holds the React Components for later use and allows for easy retrieval. Works with the new React Context and provides hooks to pull components when required. It also allows for conditions to store different components with the same key and some other cute features that I found in `react-registry` that I am forking for this project.
 
----
-## Current view
-Component registry
-```yml
-# A layout registry and their sections.
-layouts:
-  SomeLayout
-    navigation
-    sidebar::left
-    sidebar::right
-    footer
-  AnotherLayout
-  BlogListing
-  BlogPost
-  AlbumImage
-  GalleryImage
-  Gallery
-  AlbumListing
-  Recipe
+### 2. An IoC container
+Some components will need state, some will need props and others will need other components to be passed in. That would be the purpose of the IoC container. Which would work in conjunction with the registry.
 
-# A component registry with required params/props to be used. 
-# Don't know if/how state would be used.
-tiles
-  navigationTile
-    prop1
-    prop2
-    prop3
-  footer
-    prop1
-    prop2
-    prop3
-  sidebars
-    prop1
-    prop2
-    prop3
-  rss
-  aboutus
-```
+## What I am NOT doing
+### Making a babel/webpack plugin
+To statically build these pages for end-user runtime performance. While I feel like this would be an amazing addition to this blog post I'm not looking to write a plugin for either of those monsters. Esp when I"d have to consider the different languages that I'd have to support in order to get it to work. Though, at the end of the day, I think it's the right thing to do but it would have to be some sort of macro, I believe, if it were to be able to inject the code in the right place.
 
-Layout configuration
-```yml
-# The configurations for the layouts
-layout-config
-  SomeLayout
-    navigation
-      navigationTile
-    sidebar::left
-      sidebars1
-    sidebar::right
-    footer
-      rss
-      aboutus
-```
+### Creating a an Micro-Frontend Framework
+There are plenty of these that exist and they do them very well. While I'm a big fan of MFEs I am not going to write another one. Also, even if these layouts are built at runtime it would still work within an MFE and work very well. Even more flexibility in the end.
 
-Layout component
-```jsx
-RLM.layout('SomeLayout') // Set the layout you want to retrieve from
-const SomeLayout = () => (
-  <div>
-    <div>
-      {RLM.retrieve('navigation', params)}
-    </div>
-    <div>
-      {RLM.tiles('sidebar::left', params)}
-    </div>
-    <div>
-      {RLM.tiles('sidebar::right', params)}
-    </div>
-    <div>
-      {RLM.retrieve('footer', params)}
-    </div>
-  </div>
-)
-```
+## What
+I want a way to handle configurable layouts where I put less work into the 
+1. To allow you to build a suite of layouts (structure) and tiles (components that show up within the layouts)
+1. To allow you to autowire your layouts and tiles
+1. To allow you to write configuration for your SaaS webites w/o having to hand write your layouts for each SaaS client.
 
----
-## Glossary
-| Term/Thing | Definition |
-|---|---|
-| `RLM` | `react-layout-manager` |
+## Why I'm doing it
+
+## Who it's for
+
+## How it's done
+
