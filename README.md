@@ -19,7 +19,7 @@ Your questions would likely be
 
 These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager` and is essentially 2 things. 
 
-### 1. A tile (component) & layout registry 
+### 1. A tile (component) & layout registry
 A simple object that holds the React Components for later use and allows for easy retrieval. Works with the new React Context and provides hooks to pull components when required. It also allows for conditions to store different components with the same key and some other cute features that I found in `react-registry` that I am forking for this project.
 
 ### 2. An IoC container (ish)
@@ -39,15 +39,72 @@ To statically build these pages for end-user runtime performance. While I feel l
 ### Creating a an Micro-Frontend Framework
 There are plenty of these that exist and they do them very well. While I'm a big fan of MFEs I am not going to write another one. Also, even if these layouts are built at runtime it would still work within an MFE and work very well. Even more flexibility in the end.
 
+---
+Let's now discuss the actual inner workings of this thing.
+
 ## What
 I want a way to handle configurable layouts where I put less work into the 
 1. To allow you to build a suite of layouts (structure) and tiles (components that show up within the layouts)
 1. To allow you to autowire your layouts and tiles
 1. To allow you to write configuration for your SaaS webites w/o having to hand write your layouts for each SaaS client.
 
-## Why I'm doing it
-
-## Who it's for
-
 ## How it's done
 
+### Layouts
+A layout is a simple component with "no styles" where it's primary purpose is to be a structure for the content that will be provided to it. Now, this isn't realistic because a layout is going to require a grid regardless so to that I say that the layout component itself should not have embedded styles. It's best if that component is basically bare. Take this example for instance
+
+```jsx
+/**
+ * A layout that supports
+ *   - Header
+ *   - Body section
+ *   - Footer
+ */
+export const SimpleBody = () => (
+  <div>
+    <Container fluid>
+      {/* Primary header */}
+      <Row sz={sizes.large} >
+        <Col>
+          {registry('SimpleBody::header')}
+        </Col>
+      </Row>
+
+      {/*Wide body*/}
+      <Row sz={sizes.full} >
+        <Col>
+          {registry('SimpleBody::body')}
+        </Col>
+      </Row>
+
+      {/*Fat footer*/}
+      <Row sz={sizes.mega} >
+        <Col>
+          {registry('SimpleBody::footer')}
+        </Col>
+      </Row>
+    </Container>
+  </div>
+)
+```
+
+Sure, these components most likely have their own styles and this could determine it's sizes (`sz={sizes.large} >`) or even how it looks when shrunk down but the layout itself should be just the structure. Remember, layouts don't care nor should they know about state. Keep state stricktly out of the layout code. They should be the dumbest of components. It's your **tiles** that carry, maintain and update state.
+
+When this is written expect something similar to this:
+
+```jsx
+export default layout('SimpleBody', ({ registry }) => (
+  <Row sz={sizes.full} >
+    <Col>
+      {registry('body')}
+    </Col>
+  </Row>
+))
+```
+
+Notice the `{registry('SimpleBody::footer')}`. This would pull in all the tiles that are registered to both the `SimpleBody` layout and `footer` region. This would not only render them all but it will configure everything for that component and will inject any props/components into those tiles that are required.
+
+If state is required for any of the tiles those will also be injected. Currently all state management will be done using `@reduxjs` and specifically the `@reduxjs/toolkit` abstration to make life a bit easier (less boilerplate).
+
+### Tiles
+### 
