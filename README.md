@@ -19,11 +19,18 @@ Your questions would likely be
 
 These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager` and is essentially 2 things. 
 
-### 1. A registry 
+### 1. A tile (component) & layout registry 
 A simple object that holds the React Components for later use and allows for easy retrieval. Works with the new React Context and provides hooks to pull components when required. It also allows for conditions to store different components with the same key and some other cute features that I found in `react-registry` that I am forking for this project.
 
-### 2. An IoC container
+### 2. An IoC container (ish)
 Some components will need state, some will need props and others will need other components to be passed in. That would be the purpose of the IoC container. Which would work in conjunction with the registry.
+
+### 3. Dependecies Autowiring
+I don't know about you but I don't like writing configuration nor do I like having to configure, well, anything. I like things to work "out of the box" and I'm willing to buy into an eco system to do just that as everyone's time is limited if I'm going to have stress hooking up someone else's poorly put together library is not very high on my list of things to do. Nevermind "well built" libraries or frameworks where I still have issues getting some things to run for various reasons. 
+
+So, if I have to describe my components much like I would need to with TypeScript then I'd rather that and let some daemon running in the background to pick it up and do whatever is a preferred option. Basically convention over configuration with the option to configure when I need to. Chef's kiss.
+
+Mind you I'd rather not have to do even that. I would prefer the computer instinctivly know but we aren't there yet. Unless you use Haskell then you're there. No more types is baller if you ask anyone that is named Andric LibreSinn and they are often correct about things.
 
 ## What I am NOT doing
 ### Making a babel/webpack plugin
