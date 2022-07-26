@@ -19,6 +19,9 @@
 - [What I am NOT doing](#what-i-am-not-doing)
   - [Making a babel/webpack plugin](#making-a-babelwebpack-plugin)
   - [Creating a an Micro-Frontend Framework](#creating-a-an-micro-frontend-framework)
+- [Requirements](#requirements)
+  - [Components](#components)
+  - [Instrumetnation](#instrumetnation)
 - [Proposed API](#proposed-api)
   - [Layouts](#layouts)
   - [Tiles](#tiles)
@@ -63,6 +66,8 @@ For example consider this image I found on the internet
 
 What the layout itself sould be concerned with is simply the structure of it's regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra meta data like widths and allowed colours but none of this is logic this is ONLY descriptive of itself.
 
+For instance in the image above in the regions `Image 1` and `Image 2` would be regions that would only house 1 component each (tile) and within each of these regions it would only allow image tiles. 
+
 #### Why
 This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?).
 
@@ -97,6 +102,23 @@ To statically build these pages for end-user runtime performance. While I feel l
 
 ### Creating a an Micro-Frontend Framework
 There are plenty of these that exist and they do them very well. While I'm a big fan of MFEs I am not going to write another one. Also, even if these layouts are built at runtime it would still work within an MFE and work very well. Even more flexibility in the end.
+
+## Requirements
+As I've been writing this I've been pulling requirements and I'll be putting them here
+
+### Components
+| Layout | Requirement |
+|---|---|
+| Descibe layout | Size, allowed types, region size |
+
+| Tiles | Requirement |
+|---|---|
+| Descibe layout | Size, allowed types, region size |
+
+### Instrumetnation
+| Autowire | Requirement |
+|---|---|
+| Descibe layout | Size, allowed types, region size |
 
 ## Proposed API
 ### Layouts
