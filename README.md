@@ -4,8 +4,14 @@
 - [Problem Space](#problem-space)
 - [What I'm hoping to achieve](#what-im-hoping-to-achieve)
   - [To build a suite of layouts & tiles](#to-build-a-suite-of-layouts--tiles)
+    - [What](#what)
+    - [Why](#why)
   - [Autowire your layouts and tiles](#autowire-your-layouts-and-tiles)
+    - [What](#what-1)
+    - [Why](#why-1)
   - [Use configuration @ runtime](#use-configuration--runtime)
+    - [What](#what-2)
+    - [Why](#why-2)
 - [The `@mrpotatoes/react-layout-manager` apparatus](#the-mrpotatoesreact-layout-manager-apparatus)
     - [Tile & layout registry](#tile--layout-registry)
     - [IoC container (ish)](#ioc-container-ish)
@@ -49,13 +55,25 @@ I want a way to handle configurable layouts
 
 ### To build a suite of layouts & tiles
 <!-- To build a suite of layouts (structure) & tiles (state[ful] components) -->
+#### What
+The `layout` concept is just a simple stateless component that is just structure. Preferably something that manages no styles of it's own and if you were to look at it w/o any components injected into it would be just a bunch of rectangles.
 
+For example consider this image I found on the internet
+![blank layout](https://th.bing.com/th/id/R.9de38b83de2c3dabc07fee07efa1121e?rik=OH1KykJBcKQYHg&riu=http%3a%2f%2fi.stack.imgur.com%2f5jwq6.jpg&ehk=lBycKNR6bn8StBiS6j3gwUH7enK4jj9mwkEbZ6TWSdY%3d&risl=&pid=ImgRaw&r=0)
+
+What the layout itself sould be concerned with is simply the structure of it's regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra meta data like widths and allowed colours but none of this is logic this is ONLY descriptive of itself.
+
+#### Why
 This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?).
 
 ### Autowire your layouts and tiles
+#### What
+#### Why
 I don't know about you but I'm tired of writing configuration twice or even once. I would rather describe the component in some way so that I don't need to tell the management system (wherever that lives) where my code lives, how it works, where it goes etc.
 
 ### Use configuration @ runtime
+#### What
+#### Why
 To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
 
 ## The `@mrpotatoes/react-layout-manager` apparatus
