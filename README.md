@@ -3,9 +3,10 @@
 
 - [Problem Space](#problem-space)
 - [What I'm hoping to achieve](#what-im-hoping-to-achieve)
-  - [1. A tile (component) & layout registry](#1-a-tile-component--layout-registry)
-  - [2. An IoC container (ish)](#2-an-ioc-container-ish)
-  - [3. Dependencies Autowiring](#3-dependencies-autowiring)
+  - [The `@mrpotatoes/react-layout-manager` apparatus](#the-mrpotatoesreact-layout-manager-apparatus)
+    - [Tile & layout registry](#tile--layout-registry)
+    - [IoC container (ish)](#ioc-container-ish)
+    - [Dependencies Autowiring](#dependencies-autowiring)
 - [What I am NOT doing](#what-i-am-not-doing)
   - [Making a babel/webpack plugin](#making-a-babelwebpack-plugin)
   - [Creating a an Micro-Frontend Framework](#creating-a-an-micro-frontend-framework)
@@ -41,18 +42,21 @@ Your questions would likely be
 These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager`. 
 
 ## What I'm hoping to achieve
-I want a way to handle configurable layouts where I put less work into the 
+I want a way to handle configurable layouts
+
 1. To allow you to build a suite of layouts (structure) and tiles (components that show up within the layouts)
 1. To allow you to autowire your layouts and tiles
 1. To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
 
-### 1. A tile (component) & layout registry
+### The `@mrpotatoes/react-layout-manager` apparatus
+
+#### Tile & layout registry
 A simple object that holds the React Components for later use and allows for easy retrieval. Works with the new React Context and provides hooks to pull components when required. It also allows for conditions to store different components with the same key and some other cute features that I found in `react-registry` that I am forking for this project.
 
-### 2. An IoC container (ish)
+#### IoC container (ish)
 Some components will need state, some will need props and others will need other components to be passed in. That would be the purpose of the IoC container. Which would work in conjunction with the registry.
 
-### 3. Dependencies Autowiring
+#### Dependencies Autowiring
 I don't know about you but I don't like writing configuration nor do I like having to configure, well, anything. I like things to work "out of the box" and I'm willing to buy into an eco system to do just that as everyone's time is limited if I'm going to have stress hooking up someone else's poorly put together library is not very high on my list of things to do. Never mind "well built" libraries or frameworks where I still have issues getting some things to run for various reasons. 
 
 So, if I have to describe my components much like I would need to with TypeScript then I'd rather that and let some daemon running in the background to pick it up and do whatever is a preferred option. Basically convention over configuration with the option to configure when I need to. Chef's kiss.
