@@ -33,6 +33,8 @@
 
 <!-- tocstop -->
 
+![screenshot of running demo app](./docs/screenie.png)
+
 ## Problem Space
 Look, you're a multi-tenant SaaS provider and every client shares the same database and codebase. Your SaaS product is a news platform with all the bells and whistles. You have a ton of backend endpoints and they are beautiful beyond belief. You can't even imagine it. Your SaaS platform completely API driven. Thing is that now you've decided that you actually need to provide an Admin UI since most of your customers said that it is too expensive and time consuming to build an admin UI themselves.
 
