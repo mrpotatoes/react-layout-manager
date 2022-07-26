@@ -1,3 +1,23 @@
+<!-- toc -->
+
+- [Problem Space](#problem-space)
+  - [1. A tile (component) & layout registry](#1-a-tile-component--layout-registry)
+  - [2. An IoC container (ish)](#2-an-ioc-container-ish)
+  - [3. Dependencies Autowiring](#3-dependencies-autowiring)
+- [What I am NOT doing](#what-i-am-not-doing)
+  - [Making a babel/webpack plugin](#making-a-babelwebpack-plugin)
+  - [Creating a an Micro-Frontend Framework](#creating-a-an-micro-frontend-framework)
+- [What](#what)
+- [How it's done](#how-its-done)
+  - [Layouts](#layouts)
+  - [Tiles](#tiles)
+  - [Just components](#just-components)
+- [Configuration](#configuration)
+    - [Manual](#manual)
+    - [Autowiring](#autowiring)
+
+<!-- tocstop -->
+
 ## Problem Space
 Look, you're a multi-tenant SaaS provider and every client shares the same database and codebase. Your SaaS product is a news platform with all the bells and whistles. You have a ton of backend endpoints and they are beautiful beyond belief. You can't even imagine it. Your SaaS platform completely API driven. Thing is that now you've decided that you actually need to provide an Admin UI since most of your customers said that it is too expensive and time consuming to build an admin UI themselves.
 
@@ -107,8 +127,11 @@ Notice the `{registry('SimpleBody::footer')}`. This would pull in all the tiles 
 If state is required for any of the tiles those will also be injected. Currently all state management will be done using `@reduxjs` and specifically the `@reduxjs/toolkit` abstraction to make life a bit easier (less boilerplate).
 
 ### Tiles
-### 
+### Just components
 
+## Configuration
+#### Manual
+#### Autowiring
 
 ---
 A note on dependency injection. I've always disliked how "Object Oriented" focused the term is and doesn't get into why it's actually useful outside of OOP. OOP isn't the only methodology an honestly it's kind of gross when you can use functional and do things in ways that make so much more sense and is overall cleaner. It's harder to explain it though when everyone's basis is the '`new`' keyword.
