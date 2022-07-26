@@ -118,15 +118,15 @@ As I've been writing this I've been pulling requirements and I'll be putting the
 Note: This is all still up in the air and I'm trying to pull out the requirements but this, I don't think at least now, is the best format. Will revisit.
 
 ### Components
-| Layout | Requirement |
+| Layout Prop | Requirement |
 |---|---|
-| size | The tile sizes allowed in this region |
-| types | The tile types allowed |
-| region | Region name |
-| visible | Visible when loaded (is stateful and managed elsewhere and will be hidden as required) |
-| lazy | Lazy load the tiles in this region? Useful when things are below the fold |
-| async | false default, if true then this region is will be loaded eventually |
-| skeleton | Show as skeleton state when loading? |
+| `size` | The tile sizes allowed in this region |
+| `types` | The tile types allowed |
+| `region` | Region name |
+| `visible` | Visible when loaded (is stateful and managed elsewhere and will be hidden as required) |
+| `lazy` | Lazy load the tiles in this region? Useful when things are below the fold |
+| `async` | false default, if true then this region is will be loaded eventually |
+| `skeleton` | Show as skeleton state when loading? |
 
 | Tiles | Requirement |
 |---|---|
