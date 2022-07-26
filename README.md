@@ -3,10 +3,10 @@
 
 - [Problem Space](#problem-space)
 - [What I'm hoping to achieve](#what-im-hoping-to-achieve)
-  - [To allow you to build a suite of layouts (structure) & tiles (state[ful] components)](#to-allow-you-to-build-a-suite-of-layouts-structure--tiles-stateful-components)
-  - [To allow you to autowire your layouts and tiles](#to-allow-you-to-autowire-your-layouts-and-tiles)
-  - [To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.](#to-allow-you-to-write-configuration-for-your-saas-websites-wo-having-to-hand-write-your-layouts-for-each-saas-client)
-  - [The `@mrpotatoes/react-layout-manager` apparatus](#the-mrpotatoesreact-layout-manager-apparatus)
+  - [To build a suite of layouts & tiles](#to-build-a-suite-of-layouts--tiles)
+  - [Autowire your layouts and tiles](#autowire-your-layouts-and-tiles)
+  - [Use configuration @ runtime](#use-configuration--runtime)
+- [The `@mrpotatoes/react-layout-manager` apparatus](#the-mrpotatoesreact-layout-manager-apparatus)
     - [Tile & layout registry](#tile--layout-registry)
     - [IoC container (ish)](#ioc-container-ish)
     - [Dependencies Autowiring](#dependencies-autowiring)
@@ -47,13 +47,18 @@ These are the questions I want to solve in this blog post. I even created a pack
 ## What I'm hoping to achieve
 I want a way to handle configurable layouts
 
-### To allow you to build a suite of layouts (structure) & tiles (state[ful] components)
-That first bullet is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? That would allow you to 
+### To build a suite of layouts & tiles
+<!-- To build a suite of layouts (structure) & tiles (state[ful] components) -->
 
-### To allow you to autowire your layouts and tiles
-### To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
+This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?).
 
-### The `@mrpotatoes/react-layout-manager` apparatus
+### Autowire your layouts and tiles
+I don't know about you but I'm tired of writing configuration twice or even once. I would rather describe the component in some way so that I don't need to tell the management system (wherever that lives) where my code lives, how it works, where it goes etc.
+
+### Use configuration @ runtime
+To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
+
+## The `@mrpotatoes/react-layout-manager` apparatus
 
 #### Tile & layout registry
 A simple object that holds the React Components for later use and allows for easy retrieval. Works with the new React Context and provides hooks to pull components when required. It also allows for conditions to store different components with the same key and some other cute features that I found in `react-registry` that I am forking for this project.
