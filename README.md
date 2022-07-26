@@ -23,6 +23,7 @@
   - [Components](#components)
   - [Instrumetnation](#instrumetnation)
 - [Proposed API](#proposed-api)
+  - [A few functions?](#a-few-functions)
   - [Layouts](#layouts)
   - [Tiles](#tiles)
   - [Just components](#just-components)
@@ -138,6 +139,15 @@ Note: This is all still up in the air and I'm trying to pull out the requirement
 | Descibe layout | Size, allowed types, region size |
 
 ## Proposed API
+
+### A few functions?
+These functions are to map your existing components with in order to give them some extra "good ness" but really it's so that they can be more easily managed by the layout library.
+
+| Function | Explain |
+|---|---|
+| `withLayout` | Wrap a component in this to give it the state that the library will provide. It will also allow for describing the layout. |
+| `withTile` | Wrap a component in this to give it the state that the library will provide. It will also allow for describing the tile. |
+
 ### Layouts
 A layout is a simple component with "no styles" where its primary purpose is to be a structure for the content that will be provided to it. Now, this isn't realistic because a layout is going to require a grid regardless so to that I say that the layout component itself should not have embedded styles. It's best if that component is basically bare. Take this example for instance
 
