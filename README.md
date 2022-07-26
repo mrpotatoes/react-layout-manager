@@ -106,6 +106,8 @@ There are plenty of these that exist and they do them very well. While I'm a big
 ## Requirements
 As I've been writing this I've been pulling requirements and I'll be putting them here
 
+Note: This is all still up in the air and I'm trying to pull out the requirements but this, I don't think at least now, is the best format. Will revisit.
+
 ### Components
 | Layout | Requirement |
 |---|---|
