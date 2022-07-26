@@ -69,12 +69,21 @@ What the layout itself sould be concerned with is simply the structure of it's r
 For instance in the image above in the regions `Image 1` and `Image 2` would be regions that would only house 1 component each (tile) and within each of these regions it would only allow image tiles. 
 
 #### Why
-This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?).
+This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?) but the fact that your structure and your other components have no coupling together is enormous.
+
+Think of it this way. The layouts and tiles know nothing of each other. They are forced to work with each other via some ruling body (`@mrpotatoes/react-layout-manager`) that tells them where to go and how to behave together. The two types of components (layouts, tiles) only have 2 responsibilities.
+
+1. Their own presentation & state
+1. Describing themselves so that they can be properly placed/used and injected (with or into)
 
 ### Autowire your layouts and tiles
 #### What
+Each component has two responsibilities and of those two the self-describing responibility is used for `Autowire`ing the registry. To put it more succinctly:
+
+> Autowiring is a way for components to be auto registered into the layout manager registry so the engineers do not need to manage this themselves.
+
 #### Why
-I don't know about you but I'm tired of writing configuration twice or even once. I would rather describe the component in some way so that I don't need to tell the management system (wherever that lives) where my code lives, how it works, where it goes etc.
+I don't know about you but I'm tired of writing configuration twice or even once. I would rather describe the component in some way so that I don't need to tell the management system (wherever that lives) where my code lives, how it works, where it goes etc. As a matter of fact I would rather the code itself to describe the component ala static-time compiliation (note to self: find right term for this).
 
 ### Use configuration @ runtime
 #### What
@@ -111,7 +120,13 @@ Note: This is all still up in the air and I'm trying to pull out the requirement
 ### Components
 | Layout | Requirement |
 |---|---|
-| Descibe layout | Size, allowed types, region size |
+| size | The tile sizes allowed in this region |
+| types | The tile types allowed |
+| region | Region name |
+| visible | Visible when loaded (is stateful and managed elsewhere and will be hidden as required) |
+| lazy | Lazy load the tiles in this region? Useful when things are below the fold |
+| async | false default, if true then this region is will be loaded eventually |
+| skeleton | Show as skeleton state when loading? |
 
 | Tiles | Requirement |
 |---|---|

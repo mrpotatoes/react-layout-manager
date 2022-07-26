@@ -7,3 +7,12 @@
 * https://krasimir.gitbooks.io/react-in-patterns/content/chapter-10/
 * https://thomasburlesonia.medium.com/https-medium-com-thomasburlesonia-universal-dependency-injection-86a8c0881cbc
 * https://blog.testdouble.com/posts/2021-03-19-react-context-for-dependency-injection-not-state/
+
+<!-- 
+```jsx
+export const LayoutExample = ({ regions, children, props }) => (
+  <div sizes={[100, 300, 900] types={['images', 'text', 'hidden']} >
+    {region.something}
+  </div>
+)
+``` -->
