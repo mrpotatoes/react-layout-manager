@@ -1,14 +1,15 @@
+<!-- npx markdown-toc-gen insert README.md -->
 <!-- toc -->
 
 - [Problem Space](#problem-space)
+- [What I'm hoping to achieve](#what-im-hoping-to-achieve)
   - [1. A tile (component) & layout registry](#1-a-tile-component--layout-registry)
   - [2. An IoC container (ish)](#2-an-ioc-container-ish)
   - [3. Dependencies Autowiring](#3-dependencies-autowiring)
 - [What I am NOT doing](#what-i-am-not-doing)
   - [Making a babel/webpack plugin](#making-a-babelwebpack-plugin)
   - [Creating a an Micro-Frontend Framework](#creating-a-an-micro-frontend-framework)
-- [What](#what)
-- [How it's done](#how-its-done)
+- [Proposed API](#proposed-api)
   - [Layouts](#layouts)
   - [Tiles](#tiles)
   - [Just components](#just-components)
@@ -37,7 +38,13 @@ Your questions would likely be
 1. Can layouts have layouts and can tiles have tiles? (A: Tiles yes, Layouts no)
 1. Are the tiles their own app ala a Microfrontend Framework? (A: No)
 
-These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager` and is essentially 2 things. 
+These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager`. 
+
+## What I'm hoping to achieve
+I want a way to handle configurable layouts where I put less work into the 
+1. To allow you to build a suite of layouts (structure) and tiles (components that show up within the layouts)
+1. To allow you to autowire your layouts and tiles
+1. To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
 
 ### 1. A tile (component) & layout registry
 A simple object that holds the React Components for later use and allows for easy retrieval. Works with the new React Context and provides hooks to pull components when required. It also allows for conditions to store different components with the same key and some other cute features that I found in `react-registry` that I am forking for this project.
@@ -59,17 +66,7 @@ To statically build these pages for end-user runtime performance. While I feel l
 ### Creating a an Micro-Frontend Framework
 There are plenty of these that exist and they do them very well. While I'm a big fan of MFEs I am not going to write another one. Also, even if these layouts are built at runtime it would still work within an MFE and work very well. Even more flexibility in the end.
 
----
-Let's now discuss the actual inner workings of this thing.
-
-## What
-I want a way to handle configurable layouts where I put less work into the 
-1. To allow you to build a suite of layouts (structure) and tiles (components that show up within the layouts)
-1. To allow you to autowire your layouts and tiles
-1. To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
-
-## How it's done
-
+## Proposed API
 ### Layouts
 A layout is a simple component with "no styles" where its primary purpose is to be a structure for the content that will be provided to it. Now, this isn't realistic because a layout is going to require a grid regardless so to that I say that the layout component itself should not have embedded styles. It's best if that component is basically bare. Take this example for instance
 
