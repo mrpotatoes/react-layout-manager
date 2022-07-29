@@ -309,7 +309,12 @@ In this case I suggest putting all your tiles into a `./features` or `./tiles` l
         tile.js // The configuration for your tile
         state.js // Redux Toolkit code (reducer, selectors, etc)
         types.ts // If you were writing TS all types required by your feature
-      /
+      /card
+        index.js // The tile entry point
+        hooks.js // The hooks your tile provides, if any
+        tile.js // The configuration for your tile
+        state.js // Redux Toolkit code (reducer, selectors, etc)
+        types.ts // If you were writing TS all types required by your feature
     /layouts
     /store
     index.js
