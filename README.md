@@ -320,7 +320,7 @@ In this case I suggest putting all your tiles into a `./features` or `./tiles` l
     index.js
 ```
 
-What you'll see is that in each tile directory contains everything that the tile requires. It lives in isolation because it's written as if it were it's own publishable package[^tile-directory].
+What you'll see is that in each tile directory contains everything that the tile requires. It lives in isolation because it's written as if it were it's own publishable package[^tile-directory]. Remember that since your `./tiles/tile/index.js` is the entrypoint that all important exports go in here as well[^tile-exports].
 
 ### Layouts
 
@@ -363,4 +363,6 @@ Well, not really but it's the best example/reasoning imo. You can use it to do m
 # References, Footnotes & Bibliography
 
 ## Footnotes
-[^tile-directory] Granted this isn't super accurate as your `tile` would still import code from the rest of this application think of it more like each `tile` directory is a package that is published and it only exposes the API that would allow you to use it properly. So your `index.js` file would contain the exports for the other files as well if they are required for the use of this particular `tile`.
+[^tile-directory]: Granted this isn't super accurate as your `tile` would still import code from the rest of this application think of it more like each `tile` directory is a package that is published and it only exposes the API that would allow you to use it properly. So your `index.js` file would contain the exports for the other files as well if they are required for the use of this particular `tile`.
+
+[^tile-exports]: Remember thingy
