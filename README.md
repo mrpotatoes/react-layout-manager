@@ -34,10 +34,14 @@
   - [A few functions?](#a-few-functions)
   - [Layouts](#layouts)
   - [Tiles](#tiles)
-  - [Just components](#just-components)
+  - [Are just components](#are-just-components)
 - [Configuration](#configuration)
-    - [Manual](#manual)
-    - [Autowiring](#autowiring)
+  - [Manual](#manual)
+  - [Autowiring](#autowiring)
+- [Best Practices](#best-practices)
+  - [Tiles (`Features`)](#tiles-features)
+  - [Layouts](#layouts-1)
+- [Footnotes](#footnotes)
 
 <!-- tocstop -->
 
@@ -263,11 +267,58 @@ Notice the `{registry('SimpleBody::footer')}`. This would pull in all the tiles 
 If state is required for any of the tiles those will also be injected. Currently all state management will be done using `@reduxjs` and specifically the `@reduxjs/toolkit` abstraction to make life a bit easier (less boilerplate).
 
 ### Tiles
-### Just components
+### Are just components
+But wrapped.
+
+A `Tile` is just a wrapped component that comes with some extra fancy details.
+
+I want to go over the `withTile` enhancer function. When putting together a component 
+
+```jsx
+const myDeps = {
+  clicky_clicky: null,
+}
+
+const SomeComponent = withTile('key', ({ clicky_clicky }) => {
+  return (
+    <div onClick=(clicky_clicky>
+      Component with state
+    </div>
+  )
+}, myDeps)
+```
 
 ## Configuration
-#### Manual
-#### Autowiring
+### Manual
+### Autowiring
+
+## Best Practices
+### Tiles (`Features`)
+I suggest writing everything together as a `feature` much like you'd see in a project that uses `@redux/toolkit`. It is not "A given" that a `tile` will contain state or complex behavior that would need to be hooked up with other `tile`s and components but it is a given that they will be more complex than a simple button or typography component.
+
+In this case I suggest putting all your tiles into a `./features` or `./tiles` like directory wherein you'd find a similar folder structure:
+
+```
+/path/to/application/or/library
+  /src
+    /components
+    /tiles
+      /carousel
+        index.js // The tile entry point
+        hooks.js // The hooks your tile provides, if any
+        tile.js // The configuration for your tile
+        state.js // Redux Toolkit code (reducer, selectors, etc)
+        types.ts // If you were writing TS all types required by your feature
+      /
+    /layouts
+    /store
+    index.js
+```
+
+What you'll see is that in each tile directory contains everything that the tile requires. It lives in isolation because it's written as if it were it's own publishable package[^tile-directory].
+
+### Layouts
+
 
 ---
 A note on dependency injection. I've always disliked how "Object Oriented" focused the term is and doesn't get into why it's actually useful outside of OOP. OOP isn't the only methodology an honestly it's kind of gross when you can use functional and do things in ways that make so much more sense and is overall cleaner. It's harder to explain it though when everyone's basis is the '`new`' keyword.
@@ -305,3 +356,6 @@ Well, not really but it's the best example/reasoning imo. You can use it to do m
 
 --- 
 # References, Footnotes & Bibliography
+
+## Footnotes
+[^tile-directory] Granted this isn't super accurate as your `tile` would still import code from the rest of this application think of it more like each `tile` directory is a package that is published and it only exposes the API that would allow you to use it properly. So your `index.js` file would contain the exports for the other files as well if they are required for the use of this particular `tile`.
