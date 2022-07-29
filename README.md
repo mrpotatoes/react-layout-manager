@@ -1,6 +1,7 @@
 <!-- npx markdown-toc-gen insert README.md -->
 <!-- toc -->
 
+- [Preamble](#preamble)
 - [Problem Space](#problem-space)
 - [What I'm hoping to achieve](#what-im-hoping-to-achieve)
   - [To build a suite of layouts & tiles](#to-build-a-suite-of-layouts--tiles)
@@ -12,6 +13,10 @@
   - [Use configuration @ runtime](#use-configuration--runtime)
     - [What](#what-2)
     - [Why](#why-2)
+- [Terminology](#terminology)
+  - [A brief detour into `State`](#a-brief-detour-into-state)
+    - [What](#what-3)
+    - [Why](#why-3)
 - [The `@mrpotatoes/react-layout-manager` apparatus](#the-mrpotatoesreact-layout-manager-apparatus)
     - [Tile & layout registry](#tile--layout-registry)
     - [IoC container (ish)](#ioc-container-ish)
@@ -21,7 +26,7 @@
   - [Creating a an Micro-Frontend Framework](#creating-a-an-micro-frontend-framework)
 - [Requirements](#requirements)
   - [Components](#components)
-  - [Instrumetnation](#instrumetnation)
+  - [Instrumentation](#instrumentation)
 - [Proposed API](#proposed-api)
   - [A few functions?](#a-few-functions)
   - [Layouts](#layouts)
@@ -34,6 +39,22 @@
 <!-- tocstop -->
 
 ![screenshot of running demo app](./docs/screenie.png)
+
+## Preamble
+Do you know about Atomic Design? 
+![Atomic design diagram → https://snowball.digital/blog/intro-to-atomic-design](./docs/atomic-design-1.png)
+
+| Part | Explained |
+|---|---|
+| `Atom` | Atoms act as the foundational piece in any design system. eg: Color, typography, and the spacing system. But they can also include HTML elements. eg: Buttons, input fields, or icons. |
+| `Molecule` | Items built with `Atom`s. eg: A filter component built with accordions, checkboxes & buttons |
+| `Organism` | Bigger than `Atom`s. eg: Headers, footers, pagination |
+| `Templates` | Basically a `Page` without content. Contain molecues & Organisms. Think "Blueprint for pages" |
+| `Pages` | Think: Template with content |
+
+From: [Intro to Atomic Design](https://snowball.digital/blog/intro-to-atomic-design) - Joona Miettinen
+
+What does this matter? I, essentially, want to focus on the `Template` stage. This is where I see some strife in code bases when it comes to writing configurable pages/layouts.
 
 ## Problem Space
 Look, you're a multi-tenant SaaS provider and every client shares the same database and codebase. Your SaaS product is a news platform with all the bells and whistles. You have a ton of backend endpoints and they are beautiful beyond belief. You can't even imagine it. Your SaaS platform completely API driven. Thing is that now you've decided that you actually need to provide an Admin UI since most of your customers said that it is too expensive and time consuming to build an admin UI themselves.
@@ -57,10 +78,11 @@ Your questions would likely be
 These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager`. 
 
 ## What I'm hoping to achieve
-I want a way to handle configurable layouts
+I want a way to loosely couple layouts from components and the data therein. While I'm focusing on layouts this could easily be used with *ANY* `React` component. I'm looking for a way to not only loosely couple these two components but also they can be configured with data (where components show up, when, their state and props).
 
 ### To build a suite of layouts & tiles
 <!-- To build a suite of layouts (structure) & tiles (state[ful] components) -->
+
 #### What
 The `layout` concept is just a simple stateless component that is just structure. Preferably something that manages no styles of it's own and if you were to look at it w/o any components injected into it would be just a bunch of rectangles.
 
@@ -92,6 +114,22 @@ I don't know about you but I'm tired of writing configuration twice or even once
 #### What
 #### Why
 To allow you to write configuration for your SaaS websites w/o having to hand write your layouts for each SaaS client.
+
+## Terminology
+Some of the terms I'm using correlate to `Atomic Design` but I'm using different terms so that it isn't Atomic focused. Meaning, that while what I'm discussing here is influenced by `Atomic Design` it is a flavor of it for engineers so different terms will be useful. Also, while they are similar I do not believe they are a 1:1 mapping to `Atomic Design`. Lastly, as I noted above that this is _inspired_ by `Atomic Design` this blog post/series only cares about the last two stages of `Atomic Design`.
+
+| Library Term | Principle/Definition | `Atomic Design` Alias |
+|:-:|:-:|:-:|
+| `Tile` | Any `React` component that can be injected into a layout. Whereas `Atomic Design` differentiates betwen the bottom 3 stages in this library there is no consideration made for these types of components. While I believe this is a good idea to do in your own platforms for here it doesn't matter. A component should maintain it's own state, actions and behaviors. A tile is a combination of any/every stage previous to `Template` in `Atomic Design` | `Molecule` / `Organism` |
+| `Layout` | The layout in which we can further inject components | Template |
+| `Region` | A section within a `Layout` where a tile can be placed | `N/A` |
+| `Page` | The end result that is rendered to the page for an end user to interact with. The page would also contain components that pull in state |  `N/A` |
+
+### A brief detour into `State`
+`Layouts` do not manage or maintain state. They are dumb. Your `Tiles` should maintain their own state and how they operate with others. That is up to you on how to do that but I do, of course, have an example of how that can work with the library/idea that I'm proposing.
+
+#### What
+#### Why
 
 ## The `@mrpotatoes/react-layout-manager` apparatus
 
@@ -135,7 +173,7 @@ Note: This is all still up in the air and I'm trying to pull out the requirement
 |---|---|
 | Descibe layout | Size, allowed types, region size |
 
-### Instrumetnation
+### Instrumentation
 | Autowire | Requirement |
 |---|---|
 | Descibe layout | Size, allowed types, region size |
@@ -245,3 +283,7 @@ const main = async (logger, db) => { }
 There. That's dependency injection. Sorted.
 
 Well, not really but it's the best example/reasoning imo. You can use it to do more on your runtime applications but I prefer to keep it as minimal as possible. The more interweaving dependancies and code that you're running the more complex and fragile your end-application will be.
+
+
+--- 
+# References, Footnotes & Bibliography
