@@ -58,7 +58,7 @@
 | `Atom` | Atoms act as the foundational piece in any design system. eg: Color, typography, and the spacing system. But they can also include HTML elements. eg: Buttons, input fields, or icons. |
 | `Molecule` | Items built with `Atom`s. eg: A filter component built with accordions, checkboxes & buttons |
 | `Organism` | Bigger than `Atom`s. eg: Headers, footers, pagination |
-| `Templates` | Basically a `Page` without content. Contain molecues & Organisms. Think "Blueprint for pages" |
+| `Templates` | Basically a `Page` without content. May contain `Molecules` & `Organisms`. Think "Blueprint for pages" |
 | `Pages` | Think: Template with content. This is abstract and not concrete as it's the "end product." |
 
 From: [Intro to Atomic Design](https://snowball.digital/blog/intro-to-atomic-design) - Joona Miettinen
@@ -83,7 +83,7 @@ Your questions would likely be
 1. Where are these configurations going to live? (A: Pushed up on deploy, in JSON "somewhere" or API)
 1. Does this need to be async or synchronous? (A: sync)
 1. Can layouts have layouts and can tiles have tiles? (A: Tiles yes, Layouts no)
-1. Are the tiles their own app ala a Microfrontend Framework? (A: No)
+1. Are the tiles their own app ala a Micro-frontend Framework? (A: No)
 
 These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager`. 
 
@@ -94,12 +94,12 @@ I want a way to loosely couple layouts from components and the data therein. Whi
 <!-- To build a suite of layouts (structure) & tiles (state[ful] components) -->
 
 #### What
-The `layout` concept is just a simple stateless component that is just structure. Preferably something that manages no styles of it's own and if you were to look at it w/o any components injected into it would be just a bunch of rectangles.
+The `layout` concept is just a simple stateless component that is just structure. Preferably something that manages no styles of its own and if you were to look at it w/o any components injected into it would be just a bunch of rectangles.
 
 For example consider this image I found on the internet
 ![blank layout](./docs/readme-layout-example.jpg)
 
-What the layout itself sould be concerned with is simply the structure of it's regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra metadata like widths, heights and potentially allowed colours but none of this is logic, this is ONLY descriptive of itself.
+What the layout itself should be concerned with is simply the structure of its regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra metadata like widths, heights and potentially allowed colours but none of this is logic, this is ONLY descriptive of itself.
 
 For instance in the image above in the regions `Image 1` and `Image 2` would be regions that would only house 1 component each (tile) and within each of these regions it would only allow image tiles. 
 
@@ -113,12 +113,12 @@ Think of it this way. The layouts and tiles know nothing of each other. They are
 
 ### Autowire your layouts and tiles
 #### What
-Each component has two responsibilities and of those two the self-describing responibility is used for `Autowire`ing the registry. To put it more succinctly:
+Each component has two responsibilities and of those two the self-describing responsibility is used for `Autowire`ing the registry. To put it more succinctly:
 
 > Autowiring is a way for components to be auto registered into the layout manager registry so the engineers do not need to manage this themselves.
 
 #### Why
-I don't know about you but I'm tired of writing configuration twice or even once. I would rather describe the component in some way so that I don't need to tell the management system (wherever that lives) where my code lives, how it works, where it goes etc. As a matter of fact I would rather the code itself to describe the component ala static-time compiliation (note to self: find right term for this).
+I don't know about you but I'm tired of writing configuration twice or even once. I would rather describe the component in some way so that I don't need to tell the management system (wherever that lives) where my code lives, how it works, where it goes etc. As a matter of fact I would rather the code itself to describe the component ala static-time compilation (note to self: find right term for this).
 
 ### Use configuration @ runtime
 #### What
@@ -130,7 +130,7 @@ Some of the terms I'm using correlate to `Atomic Design` but I'm using different
 
 | Library Term | Principle/Definition | `Atomic Design` Alias |
 |:-:|:-|:-|
-| `Tile` | Any `React` component that can be injected into a layout. Whereas `Atomic Design` differentiates betwen the bottom 3 stages in this library there is no consideration made for these types of components. While I believe this is a good idea to do in your own platforms for here it doesn't matter. A component should maintain it's own state, actions and behaviors. A tile is a combination of any/every stage previous to `Template` in `Atomic Design` | `Molecule` / `Organism` |
+| `Tile` | Any `React` component that can be injected into a layout. Whereas `Atomic Design` differentiates between the bottom 3 stages in this library there is no consideration made for these types of components. While I believe this is a good idea to do in your own platforms for here it doesn't matter. A component should maintain its own state, actions and behaviors. A tile is a combination of any/every stage previous to `Template` in `Atomic Design` | `Molecule` / `Organism` |
 | `Layout` | The layout in which we can further inject components | Template |
 | `Region` | A section within a `Layout` where a tile can be placed | `N/A` |
 | `Page` | The end result that is rendered to the page for an end user to interact with. The page would also contain components that pull in state |  `N/A` |
@@ -158,7 +158,7 @@ Mind you I'd rather not have to do even that. I would prefer the computer instin
 
 ## What I am NOT doing
 ### Making a babel/webpack plugin
-To statically build these pages for end-user runtime performance. While I feel like this would be an amazing addition to this blog post I'm not looking to write a plugin for either of those monsters. Esp when I"d have to consider the different languages that I'd have to support in order to get it to work. Though, at the end of the day, I think it's the right thing to do but it would have to be some sort of macro, I believe, if it were to be able to inject the code in the right place.
+To statically build these pages for end-user runtime performance. While I feel like this would be an amazing addition to this blog post I'm not looking to write a plugin for either of those monsters. Esp when I'd have to consider the different languages that I'd have to support in order to get it to work. Though, at the end of the day, I think it's the right thing to do but it would have to be some sort of macro, I believe, if it were to be able to inject the code in the right place.
 
 Although, it would be trivial to find this component and replace it using `Webpack` or `Babeljs`
 ```jsx
@@ -186,12 +186,12 @@ Note: This is all still up in the air and I'm trying to pull out the requirement
 
 | Tiles | Requirement |
 |---|---|
-| Descibe layout | Size, allowed types, region size |
+| Describe layout | Size, allowed types, region size |
 
 ### Instrumentation
 | Autowire | Requirement |
 |---|---|
-| Descibe layout | Size, allowed types, region size |
+| Describe layout | Size, allowed types, region size |
 
 ## Proposed API
 
@@ -376,7 +376,7 @@ const main = async () => {
 }
 ```
 
-The next best bet is to not do this at all and instead your function signature could be something similar to the following code. This allows your test to inject the function you're testing with a `logger` (so it doesn't pollute the test output) and your `db` so you aren't doing actual DB calls. Easy peasy.
+The next best bet is to not do this at all and instead your function signature could be something similar to the following code. This allows your test to inject the function your testing with a `logger` (so it doesn't pollute the test output) and your `db` so you aren't doing actual DB calls. Easy peasy.
 
 ```js
 const main = async (logger, db) => { }
