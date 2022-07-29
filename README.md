@@ -99,7 +99,7 @@ What the layout itself sould be concerned with is simply the structure of it's r
 For instance in the image above in the regions `Image 1` and `Image 2` would be regions that would only house 1 component each (tile) and within each of these regions it would only allow image tiles. 
 
 #### Why
-This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you an build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?) but the fact that your structure and your other components have no coupling together is enormous.
+This is important. When we write `React` components we end up doing a lot of hard wiring of components just so that there is interactions between them but what if, instead, you can build all your components in complete isolation? Not at all having to worry about how they will be used in other components nor your layouts. Granted you'll still need to worry about styling but that is not a solution I'm looking to solve here (possibly an update to this tool in the future?) but the fact that your structure and your other components have no coupling together is enormous.
 
 Think of it this way. The layouts and tiles know nothing of each other. They are forced to work with each other via some ruling body (`@mrpotatoes/react-layout-manager`) that tells them where to go and how to behave together. The two types of components (layouts, tiles) only have 2 responsibilities.
 
@@ -124,7 +124,7 @@ To allow you to write configuration for your SaaS websites w/o having to hand wr
 Some of the terms I'm using correlate to `Atomic Design` but I'm using different terms so that it isn't Atomic focused. Meaning, that while what I'm discussing here is influenced by `Atomic Design` it is a flavor of it for engineers so different terms will be useful. Also, while they are similar I do not believe they are a 1:1 mapping to `Atomic Design`. Lastly, as I noted above that this is _inspired_ by `Atomic Design` this blog post/series only cares about the last two stages of `Atomic Design`.
 
 | Library Term | Principle/Definition | `Atomic Design` Alias |
-|:-:|:-:|:-:|
+|:-:|:-|:-|
 | `Tile` | Any `React` component that can be injected into a layout. Whereas `Atomic Design` differentiates betwen the bottom 3 stages in this library there is no consideration made for these types of components. While I believe this is a good idea to do in your own platforms for here it doesn't matter. A component should maintain it's own state, actions and behaviors. A tile is a combination of any/every stage previous to `Template` in `Atomic Design` | `Molecule` / `Organism` |
 | `Layout` | The layout in which we can further inject components | Template |
 | `Region` | A section within a `Layout` where a tile can be placed | `N/A` |
