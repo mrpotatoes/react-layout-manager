@@ -155,6 +155,11 @@ Mind you I'd rather not have to do even that. I would prefer the computer instin
 ### Making a babel/webpack plugin
 To statically build these pages for end-user runtime performance. While I feel like this would be an amazing addition to this blog post I'm not looking to write a plugin for either of those monsters. Esp when I"d have to consider the different languages that I'd have to support in order to get it to work. Though, at the end of the day, I think it's the right thing to do but it would have to be some sort of macro, I believe, if it were to be able to inject the code in the right place.
 
+Although, it would be trivial to find this component and replace it using `Webpack` or `Babeljs`
+```jsx
+<Registry region="SimpleBody::header" />
+```
+
 ### Creating a an Micro-Frontend Framework
 There are plenty of these that exist and they do them very well. While I'm a big fan of MFEs I am not going to write another one. Also, even if these layouts are built at runtime it would still work within an MFE and work very well. Even more flexibility in the end.
 
@@ -210,6 +215,8 @@ export const SimpleBody = () => (
       <Row sz={sizes.large} >
         <Col>
           {registry('SimpleBody::header')}
+          {/* Or alternatively */}
+          <Registry region="SimpleBody::header" />
         </Col>
       </Row>
 
@@ -217,6 +224,8 @@ export const SimpleBody = () => (
       <Row sz={sizes.full} >
         <Col>
           {registry('SimpleBody::body')}
+          {/* Or alternatively */}
+          <Registry region="SimpleBody::body" />
         </Col>
       </Row>
 
@@ -224,6 +233,8 @@ export const SimpleBody = () => (
       <Row sz={sizes.mega} >
         <Col>
           {registry('SimpleBody::footer')}
+          {/* Or alternatively */}
+          <Registry region="SimpleBody::footer" />
         </Col>
       </Row>
     </Container>
@@ -240,6 +251,8 @@ export default layout('SimpleBody', ({ registry }) => (
   <Row>
     <Col>
       {registry('body')}
+      {/* Or alternatively */}
+      <Registry region="body" />
     </Col>
   </Row>
 ))
