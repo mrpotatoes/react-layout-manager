@@ -276,17 +276,27 @@ A `Tile` is just a wrapped component that comes with some extra fancy details.
 I want to go over the `withTile` enhancer function. When putting together a component 
 
 ```jsx
-const myDeps = {
-  clicky_clicky: null,
+const about = {
+  type: '',
+  size: {
+    height: 4,
+    width: 2,
+  },
 }
 
-const SomeComponent = withTile('key', ({ clicky_clicky }) => {
+const deps = {
+  onChange: '',
+  title: '',
+  component: '',
+}
+
+const SomeComponent = withTile('key', ({ onChange, title, component }) => {
   return (
     <div onClick=(clicky_clicky>
       Component with state
     </div>
   )
-}, myDeps)
+}, deps, about)
 ```
 
 ## Configuration
