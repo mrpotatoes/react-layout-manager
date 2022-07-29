@@ -59,7 +59,7 @@
 From: [Intro to Atomic Design](https://snowball.digital/blog/intro-to-atomic-design) - Joona Miettinen
 
 ### What does this matter?
-I, essentially, want to focus on the `Template` stage. This is where I see some strife in code bases when it comes to writing configurable pages/layouts.
+I, essentially, want to focus on the `Template` and the resulting `Page` stages. This is where I see some strife in code bases when it comes to writing configurable pages/layouts.
 
 ## Problem Space
 Look, you're a multi-tenant SaaS provider and every client shares the same database and codebase. Your SaaS product is a news platform with all the bells and whistles. You have a ton of backend endpoints and they are beautiful beyond belief. You can't even imagine it. Your SaaS platform completely API driven. Thing is that now you've decided that you actually need to provide an Admin UI since most of your customers said that it is too expensive and time consuming to build an admin UI themselves.
@@ -83,7 +83,7 @@ Your questions would likely be
 These are the questions I want to solve in this blog post. I even created a package to handle this work but it wouldn't be production ready as this is just a thought experiment on my part and something that I wanted to play with. Something that I feel would be a really good pattern for others to use. That package would be called `@mrpotatoes/react-layout-manager`. 
 
 ## What I'm hoping to achieve
-I want a way to loosely couple layouts from components and the data therein. While I'm focusing on layouts this could easily be used with *ANY* `React` component. I'm looking for a way to not only loosely couple these two components but also they can be configured with data (where components show up, when, their state and props).
+I want a way to loosely couple layouts from components and the data therein. While I'm focusing on layouts this could easily be used with *ANY* `React` component. I'm looking for a way to not only loosely couple these two components but also so that they can be configured with data (where `Tiles` show up, when, their state and props).
 
 ### To build a suite of layouts & tiles
 <!-- To build a suite of layouts (structure) & tiles (state[ful] components) -->
@@ -92,9 +92,9 @@ I want a way to loosely couple layouts from components and the data therein. Whi
 The `layout` concept is just a simple stateless component that is just structure. Preferably something that manages no styles of it's own and if you were to look at it w/o any components injected into it would be just a bunch of rectangles.
 
 For example consider this image I found on the internet
-![blank layout](https://th.bing.com/th/id/R.9de38b83de2c3dabc07fee07efa1121e?rik=OH1KykJBcKQYHg&riu=http%3a%2f%2fi.stack.imgur.com%2f5jwq6.jpg&ehk=lBycKNR6bn8StBiS6j3gwUH7enK4jj9mwkEbZ6TWSdY%3d&risl=&pid=ImgRaw&r=0)
+![blank layout](./docs/readme-layout-example.jpg)
 
-What the layout itself sould be concerned with is simply the structure of it's regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra meta data like widths and allowed colours but none of this is logic this is ONLY descriptive of itself.
+What the layout itself sould be concerned with is simply the structure of it's regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra metadata like widths, heights and potentially allowed colours but none of this is logic, this is ONLY descriptive of itself.
 
 For instance in the image above in the regions `Image 1` and `Image 2` would be regions that would only house 1 component each (tile) and within each of these regions it would only allow image tiles. 
 
