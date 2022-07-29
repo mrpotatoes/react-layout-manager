@@ -365,4 +365,21 @@ Well, not really but it's the best example/reasoning imo. You can use it to do m
 ## Footnotes
 [^tile-directory]: Granted this isn't super accurate as your `tile` would still import code from the rest of this application think of it more like each `tile` directory is a package that is published and it only exposes the API that would allow you to use it properly. So your `index.js` file would contain the exports for the other files as well if they are required for the use of this particular `tile`.
 
-[^tile-exports]: Remember thingy
+[^tile-exports]: Peep the code below to see an example if you're confused.
+
+`./src/tiles/tile/index.js`
+```jsx
+import * as TileTypes from './types'
+import state from './state'
+import { useSomething } from './hooks'
+
+const SomeComponent = ({ _clicky }) => (
+  <div onClick=(clicky_clicky>
+    Component with state
+  </div>
+)
+
+export SomeComponent;
+export state;
+export useSomething;
+```
