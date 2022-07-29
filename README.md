@@ -2,6 +2,9 @@
 <!-- toc -->
 
 - [Preamble](#preamble)
+  - [Do you know about Atomic Design?](#do-you-know-about-atomic-design)
+  - [Definitions](#definitions)
+  - [What does this matter?](#what-does-this-matter)
 - [Problem Space](#problem-space)
 - [What I'm hoping to achieve](#what-im-hoping-to-achieve)
   - [To build a suite of layouts & tiles](#to-build-a-suite-of-layouts--tiles)
@@ -41,9 +44,10 @@
 ![screenshot of running demo app](./docs/screenie.png)
 
 ## Preamble
-Do you know about Atomic Design? 
+### Do you know about Atomic Design? 
 ![Atomic design diagram → https://snowball.digital/blog/intro-to-atomic-design](./docs/atomic-design-1.png)
 
+### Definitions
 | Part | Explained |
 |---|---|
 | `Atom` | Atoms act as the foundational piece in any design system. eg: Color, typography, and the spacing system. But they can also include HTML elements. eg: Buttons, input fields, or icons. |
@@ -54,7 +58,8 @@ Do you know about Atomic Design?
 
 From: [Intro to Atomic Design](https://snowball.digital/blog/intro-to-atomic-design) - Joona Miettinen
 
-What does this matter? I, essentially, want to focus on the `Template` stage. This is where I see some strife in code bases when it comes to writing configurable pages/layouts.
+### What does this matter?
+I, essentially, want to focus on the `Template` stage. This is where I see some strife in code bases when it comes to writing configurable pages/layouts.
 
 ## Problem Space
 Look, you're a multi-tenant SaaS provider and every client shares the same database and codebase. Your SaaS product is a news platform with all the bells and whistles. You have a ton of backend endpoints and they are beautiful beyond belief. You can't even imagine it. Your SaaS platform completely API driven. Thing is that now you've decided that you actually need to provide an Admin UI since most of your customers said that it is too expensive and time consuming to build an admin UI themselves.
