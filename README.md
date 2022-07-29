@@ -40,6 +40,7 @@
   - [Autowiring](#autowiring)
 - [Best Practices](#best-practices)
   - [Tiles (`Features`)](#tiles-features)
+    - [Example index.js → `./src/tiles/tile/index.js`](#example-indexjs--srctilestileindexjs)
   - [Layouts](#layouts-1)
 - [Footnotes](#footnotes)
 
@@ -322,7 +323,7 @@ In this case I suggest putting all your tiles into a `./features` or `./tiles` l
 
 What you'll see is that in each tile directory contains everything that the tile requires. It lives in isolation because it's written as if it were it's own publishable package[^tile-directory]. Remember that since your `./tiles/tile/index.js` is the entrypoint that all important exports go in here as well. Look below for a short example.
 
-`./src/tiles/tile/index.js`
+#### Example index.js → `./src/tiles/tile/index.js`
 ```jsx
 import * as TileTypes from './types'
 import state from './state'
