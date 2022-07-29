@@ -317,3 +317,7 @@ button.reaction-button {
   padding-right: 4px;
   font-size: 110%;
 }
+
+.component-registry {
+  padding: 20px;
+}

@@ -19,7 +19,7 @@ export const ComponentRegistry = () => {
   // const region1 = registerRegion(Registry, variants[variant].regions.region1.tiles)
 
   return (
-    <div>
+    <div className="component-registry">
       <h2>Pick a variant</h2>
       <Container fluid>
         <Row debug>
