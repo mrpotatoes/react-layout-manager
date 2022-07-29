@@ -50,7 +50,7 @@ Do you know about Atomic Design?
 | `Molecule` | Items built with `Atom`s. eg: A filter component built with accordions, checkboxes & buttons |
 | `Organism` | Bigger than `Atom`s. eg: Headers, footers, pagination |
 | `Templates` | Basically a `Page` without content. Contain molecues & Organisms. Think "Blueprint for pages" |
-| `Pages` | Think: Template with content |
+| `Pages` | Think: Template with content. This is abstract and not concrete as it's the "end product." |
 
 From: [Intro to Atomic Design](https://snowball.digital/blog/intro-to-atomic-design) - Joona Miettinen
 
