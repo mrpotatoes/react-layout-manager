@@ -396,3 +396,13 @@ Well, not really but it's the best example/reasoning imo. You can use it to do m
 
 ## Footnotes
 [^tile-directory]: Granted this isn't super accurate as your `tile` would still import code from the rest of this application think of it more like each `tile` directory is a package that is published and it only exposes the API that would allow you to use it properly. So your `index.js` file would contain the exports for the other files as well if they are required for the use of this particular `tile`.
+
+
+<!-- 
+
+TODO
+  - Fix state to ignore service worker stuff
+  - Start cleaning up react-registry
+  - Keep ./api directory as I will most likely use it for API request stuff.
+
+-->
