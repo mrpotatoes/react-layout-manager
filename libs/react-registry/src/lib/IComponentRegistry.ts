@@ -7,10 +7,7 @@ import Registry from './Registry';
  * @author Joe Esposito <joe@devnet.io>
  */
 export default interface IComponentRegistry {
-
 	getRegistry(target: string): Registry;
-
 	register(component: object, key: string,  conditions?: object, target?: string): void;
-
 	get(key: string, conditions?: object, target?: string): object | undefined;
 }

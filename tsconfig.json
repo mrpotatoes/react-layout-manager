@@ -1,21 +1,37 @@
 {
-    "compilerOptions": {
-      "module": "es6",
-      "jsx": "react",
-      "target": "es5",
-      "sourceMap": true,
-      "outDir": "dist/",
-      "allowJs": true,
-      "preserveConstEnums": true,
-      "experimentalDecorators": true,
-      "pretty": true,
-      "allowSyntheticDefaultImports": true,
-      "moduleResolution": "node",
-      "noUnusedLocals": true,
-      "skipLibCheck": true,
-      "baseUrl": "./"
-    },
-    "include": ["src/**/*.tsx", "src/**/*.ts"],
-    "exclude": ["node_modules", "typings/*"]
+  "include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "typings/*"],
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "module": "es6",
+    "jsx": "react",
+    "target": "es5",
+    "sourceMap": true,
+    "outDir": "dist/",
+    "allowJs": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "pretty": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+
+    "baseUrl": "./",
+
+    "paths": {
+      // "src/*": ["src/*"],
+
+      // // Package paths
+      // "@api/*": ["src/pages/*"],
+      // "@components/*": ["./src/components/*"],
+      // "@features/*": ["src/features/*"],
+
+      // Library paths
+      "@mrpotatoes/react-registry/*": ["./libs/react-registry/src/*"],
+      "@mrpotatoes/simple-ioc/*": ["./libs/simple-ioc/*"],
+    }
   }
+}
   

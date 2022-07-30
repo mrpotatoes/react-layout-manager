@@ -14,7 +14,7 @@ export const tiles = {
 }
 
 export const variants = {
-  1: {
+  '1': {
     short: 'Basic variant',
     desc: 'The simplest variant that we could use. All the components are static and don\'t require props. There is no difference between this and manually adding components into another component.',
 
@@ -39,17 +39,17 @@ export const variants = {
       region6: [],
     },
   },
-  2: {
+  '2': {
     short: 'Component w/props',
     desc: 'Some components will require props. These props can be any primative, object, functions or another component (bad practice]). These props are automatically injected once configured.',
     components: [],
   },
-  3: {
+  '3': {
     short: 'Nested components',
     desc: 'Components that require other components. What if we have components that require other components? Here I will explain if that is possible, how they are automatically injected and all setup.',
     components: [],
   },
-  4: {
+  '4': {
     short: 'Async Components',
     desc: 'Good lord just use an MFE framework. The fuck do you expect from me? Get outta here. Jeez',
     components: [],

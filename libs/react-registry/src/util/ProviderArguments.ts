@@ -13,7 +13,6 @@ export interface IProviderArguments {
 }
 
 export class ProviderArguments implements IProviderArguments {
-
 	public static isValid(args: any): boolean {
 		return typeof args === 'object' && (
 			(typeof args.conditions === 'object' && typeof args.registry === 'undefined') ||

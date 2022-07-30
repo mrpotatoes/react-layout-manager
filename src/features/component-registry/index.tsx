@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-grid-system'
-import { Registry, Registered } from 'react-registry';
+import { Registry, Registered } from '@mrpotatoes/react-registry';
 import { Link, useLocation } from 'react-router-dom'
 import qs from 'query-string'
 
@@ -15,8 +15,8 @@ const registerRegion = (reg, tiles) => tiles.map(tile => {
 
 export const ComponentRegistry = () => {
   const { search } = useLocation();
-  const variant = qs.parse(search).variant || 1  
-  // const region1 = registerRegion(Registry, variants[variant].regions.region1.tiles)
+  const variant = qs.parse(search).variant || 1
+  const region1 = registerRegion(Registry, variants[variant].regions.region1.tiles)
 
   return (
     <div className="component-registry">
@@ -37,8 +37,8 @@ export const ComponentRegistry = () => {
         <Row>
           <Col className="variant-info">
             <div>
-              <p>Below is using variant <code>{variant}</code> → {variants[variant].short}</p>
-              <p>{variants[variant].desc}</p>
+              <p>Below is using variant <code>{variant}</code> → {variants[variant as string].short}</p>
+              <p>{variants[variant as string].desc}</p>
               <p>
                 The 
               </p>
@@ -52,7 +52,7 @@ export const ComponentRegistry = () => {
         <Row debug>
           <Col debug>
             <h3>Region 1</h3>
-            {/* {region1.map(tile => (<Registered id={tile} key={tile} />))} */}
+            {region1.map(tile => (<Registered id={tile} key={tile} />))}
           </Col>
 
           <Col debug>

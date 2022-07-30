@@ -11,6 +11,11 @@ import { IProviderArguments, ProviderArguments } from './util/ProviderArguments'
  * @author Joe Esposito <joe@devnet.io>
  */
 export default class Provider {
+	private arguments: IProviderArguments;
+
+	constructor(params: IProviderArguments) {
+		this.arguments = ProviderArguments.parseArgs(params);
+	}
 
 	/**
 	 * Combines arguments held by the provider and those passes into to {@link get()} and {@link render()}
@@ -32,12 +37,6 @@ export default class Provider {
 		}
 
 		return local;
-	}
-
-	private arguments: IProviderArguments;
-
-	constructor(params: IProviderArguments) {
-		this.arguments = ProviderArguments.parseArgs(params);
 	}
 
 	/**

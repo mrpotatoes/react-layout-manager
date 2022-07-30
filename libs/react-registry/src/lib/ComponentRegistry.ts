@@ -49,12 +49,8 @@ export default class ComponentRegistry implements IComponentRegistry {
 	}
 
 	public get(key: string, conditions?: object, target?: string): object | undefined {
-		const registry = this.getRegistry(target);
-
-		if (registry) {
-			return registry.get(key, conditions);
-		}
-
-		return undefined;
+		return (this.getRegistry(target))
+			? this.getRegistry(target).get(key, conditions)
+			: undefined;
 	}
 }

@@ -12,7 +12,6 @@ import Logger from './util/Logger';
  */
 
 export default class Registry {
-
 	/**
      * Validates and registers an object or function using supplied {@link Arguments}
      * 
