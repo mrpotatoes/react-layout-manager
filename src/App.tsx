@@ -7,15 +7,18 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import { Header } from './components/Header'
-import { StartHere } from './features/start-here'
-import { Autowired } from './features/auto-wired'
-import { LayoutConfig } from './features/layouts'
-import { PostsList } from './features/posts/PostsList'
-import { AddPostForm } from './features/posts/AddPostForm'
-import { EditPostForm } from './features/posts/EditPostForm'
-import { SinglePostPage } from './features/posts/SinglePostPage'
-import { ComponentRegistry } from './features/component-registry'
+// Misc components
+import { Header } from './components/misc/Header'
+
+// Pages
+import { StartHere } from './components/pages/start-here'
+import { Autowired } from './components/pages/auto-wired'
+import { LayoutConfig } from './components/pages/layouts'
+import { Posts } from './components/pages/posts'
+import { AddPost } from './components/pages/posts/add'
+import { EditPostForm } from './components/pages/posts/edit'
+import { Post } from './components/pages/posts/post'
+import { ComponentRegistry } from './components/pages/component-registry'
 
 export default () => (
   <Router>
@@ -27,12 +30,12 @@ export default () => (
           path="/"
           render={() => (
             <React.Fragment>
-              <AddPostForm />
-              <PostsList />
+              <AddPost />
+              <Posts />
             </React.Fragment>
           )}
         />
-        <Route exact path="/posts/:postId" component={SinglePostPage} />
+        <Route exact path="/posts/:postId" component={Post} />
         <Route exact path="/editPost/:postId" component={EditPostForm} />
         <Route exact path="/layout-config" component={LayoutConfig} />
         <Route exact path="/component-registry" component={ComponentRegistry} />
