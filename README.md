@@ -388,6 +388,10 @@ Well, not really but it's the best example/reasoning imo. You can use it to do m
 
 
 --- 
+# TODO
+* Don't forget to us `peer-dependencies` when creating the new `react-registry`
+
+--- 
 # References, Footnotes & Bibliography
 
 ## Footnotes
