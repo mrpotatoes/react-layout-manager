@@ -46,11 +46,11 @@
 
 <!-- tocstop -->
 
-![screenshot of running demo app](./docs/screenie.png)
+![screenshot of running demo app](./docs/assets/screenie.png)
 
 ## Preamble
 ### Do you know about Atomic Design? 
-![Atomic design diagram → https://snowball.digital/blog/intro-to-atomic-design](./docs/atomic-design-1.png)
+![Atomic design diagram → https://snowball.digital/blog/intro-to-atomic-design](./docs/assets/atomic-design-1.png)
 
 ### Definitions
 | Part | Explained |
@@ -97,7 +97,7 @@ I want a way to loosely couple layouts from components and the data therein. Whi
 The `layout` concept is just a simple stateless component that is just structure. Preferably something that manages no styles of its own and if you were to look at it w/o any components injected into it would be just a bunch of rectangles.
 
 For example consider this image I found on the internet
-![blank layout](./docs/readme-layout-example.jpg)
+![blank layout](./docs/assets/readme-layout-example.jpg)
 
 What the layout itself should be concerned with is simply the structure of its regions, how many tiles each region can house, the responsiveness and the like. Maybe even extra metadata like widths, heights and potentially allowed colours but none of this is logic, this is ONLY descriptive of itself.
 
