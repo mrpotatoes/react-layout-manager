@@ -7,6 +7,7 @@
 * https://krasimir.gitbooks.io/react-in-patterns/content/chapter-10/
 * https://thomasburlesonia.medium.com/https-medium-com-thomasburlesonia-universal-dependency-injection-86a8c0881cbc
 * https://blog.testdouble.com/posts/2021-03-19-react-context-for-dependency-injection-not-state/
+* https://medium.com/@magnusjt/ioc-container-in-nodejs-e7aea8a89600
 
 <!-- 
 ```jsx

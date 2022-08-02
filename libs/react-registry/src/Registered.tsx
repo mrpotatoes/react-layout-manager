@@ -3,19 +3,13 @@ import * as React from 'react';
 
 import Provider from './Provider';
 import Registry from './Registry';
-import { Arguments, IArguments } from './util/Arguments';
-import { IProviderArguments, ProviderArguments } from './util/ProviderArguments';
-
-/**
- * React component for retrieving other components form the registry
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs/#/retrieving}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
+import { Arguments } from './util/Arguments';
+import { IArguments } from './types';
+import { ProviderArguments } from './util/ProviderArguments';
+import { IProviderArguments } from './types';
 
 // Type of props any to allow passing of many props into the registered component
 export default class Registered extends React.Component<IArguments, any> {
-
 	public static contextTypes = {
 		registryProviderArgs: PropTypes.object
 	};

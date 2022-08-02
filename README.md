@@ -404,5 +404,6 @@ TODO
   - Fix state to ignore service worker stuff
   - Start cleaning up react-registry
   - Keep ./api directory as I will most likely use it for API request stuff.
+  - Turn this into a monorepo as it's getting out of hand now
 
 -->

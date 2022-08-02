@@ -1,7 +1,3 @@
-/**
- * Determines if a set is a subset of another
- */
-
 export const isSubset = (superSet: any, subSet: any): boolean => {
 	// If one of the sets is not provided, return false
 	if ((typeof superSet !== 'object' || superSet === null) || (typeof subSet !== 'object' || subSet === null)) {

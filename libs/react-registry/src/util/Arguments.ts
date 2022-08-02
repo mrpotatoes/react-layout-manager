@@ -1,21 +1,21 @@
-import { IArguments } from './Arguments';
+import { IArguments } from '../types'
 import Logger from './Logger';
 
-/**
- * Parses and validates the common arguments object passed to many react-registry classes
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs/#arguments}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
-
-export interface IArguments {
-	id: string;
-	conditions?: object;
-	registry?: string;
-}
-
 export class Arguments implements IArguments {
+	public id: string;
+	public conditions?: object;
+	public registry?: string;
 
+	constructor(id: string, conditions?: object, registry?: string) {
+		this.id = id;
+		this.conditions = conditions;
+		this.registry = registry;
+	}
+
+	public isValid(): boolean {
+		return Arguments.isValid(this);
+	}
+	
 	public static isValid(args: any): boolean {
 		return typeof args === 'string' || (typeof args === 'object' && (
 			(typeof args.id === 'string' && typeof args.conditions === 'undefined' && typeof args.registry === 'undefined') ||
@@ -25,8 +25,7 @@ export class Arguments implements IArguments {
 		));
 	}
 
-	public static parseArgs(params: any, thow: boolean = true): Arguments {
-		
+	public static parseArgs(params: any, thow: boolean = true): IArguments {		
 		if (thow && !Arguments.isValid(params)) {
 			Logger.throw("arguments.common"); // id is essential, throw error instead of logging it
 		}
@@ -85,19 +84,5 @@ export class Arguments implements IArguments {
 		}
 
 		return Arguments.parseArgs(componentArgs);
-	}
-
-	public id: string;
-	public conditions?: object;
-	public registry?: string;
-
-	constructor(id: string, conditions?: object, registry?: string) {
-		this.id = id;
-		this.conditions = conditions;
-		this.registry = registry;
-	}
-
-	public isValid(): boolean {
-		return Arguments.isValid(this);
 	}
 }

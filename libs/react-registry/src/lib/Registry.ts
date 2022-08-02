@@ -1,12 +1,6 @@
 import ObjectMap from '../util/ObjectMap';
 import RegistryEntry from './RegistryEntry';
 
-/**
- * A collection of components with conditions
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
 export default class Registry {
 	private registry: ObjectMap;
 	
@@ -17,7 +11,7 @@ export default class Registry {
 	public register(component: object, key: string, conditions?: object): void {
 		const entry = this.getEntry(key);
 
-		if(entry) {
+		if (entry) {
 			entry.add(component, conditions);
 		} else {
 			const newEntry = new RegistryEntry();
@@ -33,7 +27,7 @@ export default class Registry {
 	public get(key: string, conditions?: object): object | undefined {
 		const entry = this.getEntry(key);
 
-		if(entry) {
+		if (entry) {
 			return entry.get(false, conditions); // TODO implement mustMatch
 		}
 

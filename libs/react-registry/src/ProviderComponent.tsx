@@ -3,17 +3,7 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { ProviderArguments } from './util/ProviderArguments';
-
-/**
- * React component for passing arguments of a {@link Provider} with context to {@link Registered} components
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs#provider}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
-export interface IProviderProps {
-	conditions?: object;
-	registry?: string;
-}
+import { IProviderProps } from './types';
 
 export default class ProviderComponent extends React.Component<IProviderProps, any> {
 	public static propTypes = {

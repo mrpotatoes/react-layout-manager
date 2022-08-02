@@ -1,14 +1,8 @@
 import ObjectMap from '../util/ObjectMap';
-import IComponentRegistry from './IComponentRegistry';
+import { ComponentRegistry as TYP } from '../types';
 import Registry from './Registry';
 
-/**
- * Core functionality of the react-registry library. Use through {@link Registry} instead of directly.
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
-export default class ComponentRegistry implements IComponentRegistry {
+export default class ComponentRegistry implements TYP {
 	public static DEFAULT_TARGET: string = "default";
 
 	public static getInstance() {

@@ -1,15 +1,8 @@
 import { find } from 'lodash';
-import * as Sets from '../util/set';
-
 import Logger from '../util/Logger';
 import ComponentEntry from './ComponentEntry';
+import * as Sets from '../util/set';
 
-/**
- * Holds a list of components and their associated conditions for retrieval
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
 export default class RegistryEntry {
 	private components: ComponentEntry[];
 
@@ -17,10 +10,6 @@ export default class RegistryEntry {
 		this.components = new Array();
 	}
 
-	/**
-	 * Returns the component with no associated conditions.
-	 * Only one default component will be present.
-	 */
 	public findDefault(): ComponentEntry | undefined { // use lodash for find to avoid the need for es6 pollyfill
 		return find(this.components, (ce) => ce.conditions === undefined);
 	}
@@ -30,9 +19,8 @@ export default class RegistryEntry {
 		return c ? c.component : undefined;
 	}
 
-	public get(mustMatch: boolean, conditions?: object): object | undefined {
-		
-		if(conditions === undefined) {
+	public get(mustMatch: boolean, conditions?: object): object | undefined {		
+		if (conditions === undefined) {
 			// If there are no conditions provided, return the default component
 			return this.getDefault();
 		} else {
@@ -51,7 +39,7 @@ export default class RegistryEntry {
 	}
 
 	public add(component: object, conditions?: object): void {
-		if(conditions === undefined && this.findDefault() !== undefined) {
+		if (conditions === undefined && this.findDefault() !== undefined) {
 			Logger.warn("duplicate");
 		} else {
 			const ce = new ComponentEntry(component, conditions);

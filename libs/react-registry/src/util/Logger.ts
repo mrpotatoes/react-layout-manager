@@ -2,13 +2,6 @@ import { get } from 'lodash';
 
 import dictionary from './dictionary';
 
-/**
- * Handles output of feedback messages
- * For full documentation: {@link https://www.devnet.io/libs/react-registry/docs}
- * 
- * @author Joe Esposito <joe@devnet.io>
- */
-
 declare var process: any;
 
 export default class Logger {
