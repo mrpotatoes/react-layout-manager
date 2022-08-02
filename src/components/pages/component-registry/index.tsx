@@ -2,14 +2,14 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-grid-system'
-import { Registry, Registered } from '@mrpotatoes/react-registry';
+import { Registry, Registered, register } from '@mrpotatoes/react-registry';
 import { Link, useLocation } from 'react-router-dom'
 import qs from 'query-string'
 
 import { variants, tiles, layouts } from './config'
 
 const registerRegion = (reg, tiles) => tiles.map(tile => {
-  Registry.register(tile.tile, tile.key)
+  register(tile.tile, tile.key)
   return tile.key
 })
 

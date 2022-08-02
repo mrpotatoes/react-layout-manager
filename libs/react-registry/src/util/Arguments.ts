@@ -1,7 +1,7 @@
-import { IArguments } from '../types'
+import { Args } from '../types'
 import Logger from './Logger';
 
-export class Arguments implements IArguments {
+export class Arguments implements Args {
 	public id: string;
 	public conditions?: object;
 	public registry?: string;
@@ -25,7 +25,7 @@ export class Arguments implements IArguments {
 		));
 	}
 
-	public static parseArgs(params: any, thow: boolean = true): IArguments {		
+	public static parseArgs(params: any, thow: boolean = true): Args {		
 		if (thow && !Arguments.isValid(params)) {
 			Logger.throw("arguments.common"); // id is essential, throw error instead of logging it
 		}
@@ -39,7 +39,7 @@ export class Arguments implements IArguments {
 		}		
 	}
 
-	public static parseComponentArgs(component: any, params: string | object): IArguments {
+	public static parseComponentArgs(component: any, params: string | object): Args {
 		const componentArgs: any = {};
 		
 		// Arugmnets provided by component functions
@@ -62,7 +62,7 @@ export class Arguments implements IArguments {
 		}
 
 		// Parse arguments but don't throw error for invalid arguments yet
-		const paramArgs: IArguments = Arguments.parseArgs(params, false);
+		const paramArgs: Args = Arguments.parseArgs(params, false);
 
 		// Arguments provied to register function. Override those provided by component.
 		if(typeof paramArgs !== 'undefined') {

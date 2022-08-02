@@ -2,11 +2,11 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 import Provider from './Provider';
-import Registry from './Registry';
+import { render } from './Registry';
 import { Arguments } from './util/Arguments';
-import { IArguments } from './types';
+import { Args } from './types';
 import { ProviderArguments } from './util/ProviderArguments';
-import { IProviderArguments } from './types';
+import { ProviderArgs } from './types';
 
 // Type of props any to allow passing of many props into the registered component
 export default class Registered extends React.Component<IArguments, any> {
@@ -19,16 +19,16 @@ export default class Registered extends React.Component<IArguments, any> {
 	}
 
 	public render() {
-		let args: IArguments = Arguments.parseArgs({ ...this.props });
+		let args: Args = Arguments.parseArgs({ ...this.props });
 
 		/** Determine if a {@link ProviderComponent} is present */
 		if (this.context.registryProviderArgs) {
 
 			// Supplement supplied arguments with those from the provider
-			const providerArgs: IProviderArguments = ProviderArguments.parseArgs(this.context.registryProviderArgs);
+			const providerArgs: ProviderArgs = ProviderArguments.parseArgs(this.context.registryProviderArgs);
 			args = Provider.getArgs(providerArgs, args);
 		}
 
-		return Registry.render(args, { ...this.props }) as JSX.Element;
+		return render(args, { ...this.props }) as JSX.Element;
 	}
 }
