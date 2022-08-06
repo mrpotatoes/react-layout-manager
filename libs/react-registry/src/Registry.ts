@@ -11,7 +11,7 @@ import { parseArgs, parseComponentArgs } from './util/Arguments';
  */
 export const register = (component: any, params?: string | Args): void => {
 	if ((typeof component === 'object' || typeof component === 'function') && (typeof params === 'undefined' ||  typeof params !== 'object' || typeof params !== 'string')) {
-		const args: Args = parseComponentArgs(component, params); 
+		const args: Args = parseComponentArgs(component, params as string | object); 
 		
 		ComponentRegistry.getInstance().register(component, args.id, args.conditions, args.registry);
 	} else {

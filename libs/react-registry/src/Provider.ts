@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Registry, { get, render } from './Registry';
+import { get, render } from './Registry';
 import { parseArgs } from './util/Arguments';
 import { ProviderArguments } from './util/ProviderArguments';
 import { Args, ProviderArgs } from './types';
