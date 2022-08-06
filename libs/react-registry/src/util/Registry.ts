@@ -1,8 +1,8 @@
 import * as React from 'react';
-import ComponentRegistry from './lib/ComponentRegistry';
-import Logger from './util/Logger';
-import { Args } from './types';
-import { parseArgs, parseComponentArgs } from './util/Arguments';
+import ComponentRegistry from '../lib/ComponentRegistry';
+import Logger from './Logger';
+import { Args } from '../config/types';
+import { parseArgs, parseComponentArgs } from './Arguments';
 
 /**
  * 
@@ -53,6 +53,4 @@ export const render = (params: string | Args, props?: object): React.ReactElemen
  * @param props 
  * @returns 
  */
-export const createElement = (params: string | Args, props?: object): React.ReactElement<any> | undefined => {
-	return render(params, props);
-}
+export const createElement = (params: string | Args, props?: object): React.ReactElement<any> | undefined => render(params, props)

@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import dictionary from '../../config/copy';
+import dictionary from '../config/copy';
 
 declare var process: any;
 

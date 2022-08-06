@@ -1,7 +1,5 @@
-import Registry from './Registry';
-
 export interface ComponentRegistry {
-  getRegistry(target: string): Registry;
+  getRegistry(target: string): any;
   register(component: object, key: string,  conditions?: object, target?: string): void;
   get(key: string, conditions?: object, target?: string): object | undefined;
 }

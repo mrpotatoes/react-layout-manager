@@ -2,10 +2,10 @@ import * as lodash from 'lodash';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-import { ProviderArguments } from './util/ProviderArguments';
-import { IProviderProps } from './types';
+import { ProviderArguments } from '../util/ProviderArguments';
+// import { IProviderProps } from '../config/types';
 
-export default class ProviderComponent extends React.Component<IProviderProps, any> {
+export default class ProviderComponent extends React.Component<any, any> {
 	public static propTypes = {
 		conditions: PropTypes.object,
 		registry: PropTypes.string
@@ -19,7 +19,7 @@ export default class ProviderComponent extends React.Component<IProviderProps, a
 		registryProviderArgs: PropTypes.object
 	};
 
-	constructor(props: IProviderProps) {
+	constructor(props: any) {
 		super(props);
 	}
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { get, render } from './Registry';
-import { parseArgs } from './util/Arguments';
-import { ProviderArguments } from './util/ProviderArguments';
-import { Args, ProviderArgs } from './types';
+import { parseArgs } from './Arguments';
+import { ProviderArguments } from './ProviderArguments';
+import { Args, ProviderArgs } from '../config/types';
 
 export default class Provider {
 	private arguments: ProviderArgs;
