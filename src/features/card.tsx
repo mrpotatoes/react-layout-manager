@@ -11,17 +11,17 @@ export const Card = () => (
     <Row debug>
       <Col>
         <div className="card">
-          <img src="https://via.placeholder.com/350x300" className="card-img-top" alt="..." />
+          {/* <img src="https://via.placeholder.com/350x300" className="card-img-top" alt="..." /> */}
         </div>
       </Col>
     </Row>
     <Row>
       <Col>
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
+          <h5 className="card-title">Card Regular</h5>
+          {/* <p className="card-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum lacinia egestas. Nullam auctor tortor euismod turpis egestas pretium. Aliquam ullamcorper nulla .
-          </p>
+          </p> */}
           <Row justify="center">
             <button>Button</button>
           </Row>

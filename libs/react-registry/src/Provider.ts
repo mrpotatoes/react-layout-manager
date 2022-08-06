@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Registry, { get, render } from './Registry';
-import { Arguments } from './util/Arguments';
+import { parseArgs } from './util/Arguments';
 import { ProviderArguments } from './util/ProviderArguments';
 import { Args, ProviderArgs } from './types';
 
@@ -27,12 +27,12 @@ export default class Provider {
 	}
 
 	public get(params: string | Args): object | undefined {
-		const local: Args = Arguments.parseArgs(params);
+		const local: Args = parseArgs(params);
 		return get(Provider.getArgs(this.arguments, local));
 	}
 
 	public render(params: string | Args, props?: object): object | undefined {
-		const local: Args = Arguments.parseArgs(params);
+		const local: Args = parseArgs(params);
 		return render(Provider.getArgs(this.arguments, local), props);
 	}
 

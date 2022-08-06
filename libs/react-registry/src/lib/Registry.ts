@@ -1,11 +1,10 @@
-import ObjectMap from '../util/ObjectMap';
 import RegistryEntry from './RegistryEntry';
 
 export default class Registry {
-	private registry: ObjectMap;
+	private registry;
 	
 	constructor() {
-		this.registry = new ObjectMap();
+		this.registry = {}
 	}
 
 	public register(component: object, key: string, conditions?: object): void {
@@ -16,12 +15,12 @@ export default class Registry {
 		} else {
 			const newEntry = new RegistryEntry();
 			newEntry.add(component, conditions);
-			this.registry.put(key, newEntry);
+			this.registry[key] = newEntry;
 		}
 	}
 
 	public getEntry(key: string): RegistryEntry | undefined {
-		return this.registry.get(key);
+		return this.registry[key];
 	}
 
 	public get(key: string, conditions?: object): object | undefined {

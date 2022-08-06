@@ -11,9 +11,9 @@ export const CardReverse = () => (
     <Row>
       <Col>
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
+          <h5 className="card-title">Card Reverse</h5>
           <p className="card-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum lacinia egestas. Nullam auctor tortor euismod turpis egestas pretium. Aliquam ullamcorper nulla .
+            {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum lacinia egestas. Nullam auctor tortor euismod turpis egestas pretium. Aliquam ullamcorper nulla . */}
           </p>
           <Row justify="center">
             <button>Button</button>
@@ -24,7 +24,7 @@ export const CardReverse = () => (
     <Row debug>
       <Col>
         <div className="card">
-          <img src="https://via.placeholder.com/350x300" className="card-img-top" alt="..." />
+          {/* <img src="https://via.placeholder.com/350x300" className="card-img-top" alt="..." /> */}
         </div>
       </Col>
     </Row>

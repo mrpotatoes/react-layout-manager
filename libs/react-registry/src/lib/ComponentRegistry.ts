@@ -1,9 +1,17 @@
-import ObjectMap from '../util/ObjectMap';
-import { ComponentRegistry as TYP } from '../types';
 import Registry from './Registry';
+import { has } from 'lodash'
 
-export default class ComponentRegistry implements TYP {
+export default class ComponentRegistry {
+	private registries = {}
 	public static DEFAULT_TARGET: string = "default";
+	private static instance: ComponentRegistry;
+
+	private constructor() {
+		// Initialize the registries container and default target
+		const defaultRegistry: Registry = new Registry();
+
+		this.registries[ComponentRegistry.DEFAULT_TARGET] = defaultRegistry
+	}
 
 	public static getInstance() {
 		if (!ComponentRegistry.instance) {
@@ -12,26 +20,15 @@ export default class ComponentRegistry implements TYP {
 		return ComponentRegistry.instance;
 	}
 
-	private static instance: ComponentRegistry;
-	private registries: ObjectMap;
-
-	private constructor() {
-		// Initialize the registries container and default target
-		const defaultRegistry: Registry = new Registry();
-
-		this.registries = new ObjectMap();
-		this.registries.put(ComponentRegistry.DEFAULT_TARGET, defaultRegistry);
-	}
-
-	public getRegistry(target?: string): Registry {
-		target = (target) ? target : ComponentRegistry.DEFAULT_TARGET;
-
-		if (this.registries.has(target)) {
-			return this.registries.get(target) as Registry;
-		}
-
+	public getRegistry(targetOption?: string): Registry {
 		const newRegistry: Registry = new Registry();
-		this.registries.put(target, newRegistry);
+		const target = (targetOption) ? targetOption : ComponentRegistry.DEFAULT_TARGET;
+		
+		if (has(this.registries, target)) {
+			return this.registries[target] as Registry;
+		}
+		
+		this.registries[target] = newRegistry
 
 		return newRegistry;
 	}

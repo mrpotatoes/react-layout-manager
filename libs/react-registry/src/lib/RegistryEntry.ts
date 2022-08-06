@@ -1,13 +1,21 @@
 import { find } from 'lodash';
 import Logger from '../util/Logger';
-import ComponentEntry from './ComponentEntry';
 import * as Sets from '../util/set';
+
+interface ComponentEntry {
+	component: object
+	conditions: object | undefined
+}
+
+const RegistryEntry2 = (registry: ComponentEntry[] = []) => () => {
+
+}
 
 export default class RegistryEntry {
 	private components: ComponentEntry[];
 
 	constructor() {
-		this.components = new Array();
+		this.components = [];
 	}
 
 	public findDefault(): ComponentEntry | undefined { // use lodash for find to avoid the need for es6 pollyfill
@@ -42,8 +50,8 @@ export default class RegistryEntry {
 		if (conditions === undefined && this.findDefault() !== undefined) {
 			Logger.warn("duplicate");
 		} else {
-			const ce = new ComponentEntry(component, conditions);
-			this.components.push(ce);
+			// const ce = new ComponentEntry(component, conditions);
+			this.components.push({component, conditions});
 		}
 	}
 }

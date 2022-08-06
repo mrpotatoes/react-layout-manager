@@ -1,88 +1,65 @@
-import { Args } from '../types'
+// import { Args } from '../types'
 import Logger from './Logger';
 
-export class Arguments implements Args {
-	public id: string;
-	public conditions?: object;
-	public registry?: string;
+export const isValid = (args: any): boolean => 
+  typeof args === 'string' || (typeof args === 'object' && (
+    (typeof args.id === 'string' && typeof args.conditions === 'undefined' && typeof args.registry === 'undefined') ||
+    (typeof args.id === 'string' && typeof args.conditions === 'object' && typeof args.registry === 'undefined') ||
+    (typeof args.id === 'string' && typeof args.conditions === 'undefined' && typeof args.registry === 'string') ||
+    (typeof args.id === 'string' && typeof args.conditions === 'object' && typeof args.registry === 'string')
+  ));
 
-	constructor(id: string, conditions?: object, registry?: string) {
-		this.id = id;
-		this.conditions = conditions;
-		this.registry = registry;
-	}
+	export const parseArgs = (params: any, thow: boolean = true) => {
+  if (thow && !isValid(params)) {
+    Logger.throw("arguments.common"); // id is essential, throw error instead of logging it
+  }
 
-	public isValid(): boolean {
-		return Arguments.isValid(this);
-	}
-	
-	public static isValid(args: any): boolean {
-		return typeof args === 'string' || (typeof args === 'object' && (
-			(typeof args.id === 'string' && typeof args.conditions === 'undefined' && typeof args.registry === 'undefined') ||
-			(typeof args.id === 'string' && typeof args.conditions === 'object' && typeof args.registry === 'undefined') ||
-			(typeof args.id === 'string' && typeof args.conditions === 'undefined' && typeof args.registry === 'string') ||
-			(typeof args.id === 'string' && typeof args.conditions === 'object' && typeof args.registry === 'string')
-		));
-	}
+  return {
+    id: (typeof params === 'string') ? params : params.id,
+    conditions: params.conditions,
+    registry: params.registry,
+  }
+}
 
-	public static parseArgs(params: any, thow: boolean = true): Args {		
-		if (thow && !Arguments.isValid(params)) {
-			Logger.throw("arguments.common"); // id is essential, throw error instead of logging it
-		}
+export const parseComponentArgs = (component: any, params: string | object) => {
+  const paramArgs = parseArgs(params, false);
+  const componentArgs: any = {};
+  
+  // Arugmnets provided by component functions
+  if (typeof component !== 'undefined') {   
+    // Id provided by component
+    if (typeof component.getId !== 'undefined') {
+      componentArgs.id = component.getId();
+    }
 
-		if (typeof params === 'string') { // id from string
-			return new Arguments(params);
-		}
+    // Conditions provided by component
+    if (typeof component.getConditions !== 'undefined') {
+      componentArgs.conditions = component.getConditions();
+    }
 
-		if (typeof params === 'object') {
-			return new Arguments(params.id, params.conditions, params.registry);
-		}		
-	}
+    // Registry provided by component
+    if (typeof component.getRegistry !== 'undefined') {
+      componentArgs.registry = component.getRegistry();
+    }
+  }
 
-	public static parseComponentArgs(component: any, params: string | object): Args {
-		const componentArgs: any = {};
-		
-		// Arugmnets provided by component functions
-		if(typeof component !== 'undefined') {
-		
-			// Id provided by component
-			if(typeof component.getId !== 'undefined') {
-				componentArgs.id = component.getId();
-			}
+  // Arguments provied to register function. Override those provided by component.
+  if (typeof paramArgs !== 'undefined') {   
+    // Override id provied by component function with id provied by args
+    if (typeof paramArgs.id !== 'undefined') {
+      componentArgs.id = paramArgs.id;
+    }
 
-			// Conditions provided by component
-			if(typeof component.getConditions !== 'undefined') {
-				componentArgs.conditions = component.getConditions();
-			}
+    // Override conditions provied by component function with conditions provied by args
+    if (typeof paramArgs.conditions !== 'undefined') {
+      componentArgs.conditions = paramArgs.conditions;
+    }
 
-			// Registry provided by component
-			if(typeof component.getRegistry !== 'undefined') {
-				componentArgs.registry = component.getRegistry();
-			}
-		}
+    // Override registry provied by component function with registry provied by args
+    if (typeof paramArgs.registry !== 'undefined') {
+      componentArgs.registry = paramArgs.registry;
+    }
+  }
 
-		// Parse arguments but don't throw error for invalid arguments yet
-		const paramArgs: Args = Arguments.parseArgs(params, false);
-
-		// Arguments provied to register function. Override those provided by component.
-		if(typeof paramArgs !== 'undefined') {
-		
-			// Override id provied by component function with id provied by args
-			if(typeof paramArgs.id !== 'undefined') {
-				componentArgs.id = paramArgs.id;
-			}
-
-			// Override conditions provied by component function with conditions provied by args
-			if(typeof paramArgs.conditions !== 'undefined') {
-				componentArgs.conditions = paramArgs.conditions;
-			}
-
-			// Override registry provied by component function with registry provied by args
-			if(typeof paramArgs.registry !== 'undefined') {
-				componentArgs.registry = paramArgs.registry;
-			}
-		}
-
-		return Arguments.parseArgs(componentArgs);
-	}
+  return parseArgs(componentArgs);
 }
