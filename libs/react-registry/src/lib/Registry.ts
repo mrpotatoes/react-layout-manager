@@ -8,7 +8,7 @@ export default class Registry {
 	}
 
 	public register(component: object, key: string, conditions?: object): void {
-		const entry = this.getEntry(key);
+		const entry = this.registry[key];
 
 		if (entry) {
 			entry.add(component, conditions);
@@ -19,12 +19,8 @@ export default class Registry {
 		}
 	}
 
-	public getEntry(key: string): RegistryEntry | undefined {
-		return this.registry[key];
-	}
-
 	public get(key: string, conditions?: object): object | undefined {
-		const entry = this.getEntry(key);
+		const entry = this.registry[key]
 
 		if (entry) {
 			return entry.get(false, conditions); // TODO implement mustMatch
